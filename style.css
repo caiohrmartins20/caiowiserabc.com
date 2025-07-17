@@ -56,21 +56,19 @@ body {
 .header-content {
     display: flex;
     align-items: center;
-    /* Ajuste para alinhar os itens e o logo visivelmente */
-    justify-content: space-between; /* Permite que os elementos se espalhem */
+    /* Usamos space-between para empurrar o menu para a esquerda e o botão para a direita */
+    /* E o logo será centralizado com margin auto na navegação */
+    justify-content: space-between; 
     padding: 15px 20px;
     position: relative;
     height: 100%;
 }
 
 .logo {
-    /* Ajustado para centralizar o logo no fluxo flexbox */
-    position: absolute; /* Usamos absolute para centralizar o logo independentemente da nav */
-    left: 50%;
-    transform: translateX(-50%);
-    order: 0; /* Remove a ordem do logo, pois o absolute o tira do fluxo */
-    margin: 0; /* Remove margem que possa interferir na centralização */
-    z-index: 1; /* Garante que o logo esteja acima da nav se ela não estiver ativa */
+    /* Removido position absolute para desktop. Agora o logo estará no fluxo normal */
+    /* O JS adiciona ele no meio, e a nav se ajusta com margin: auto */
+    z-index: 5; /* Z-index para garantir que esteja acima da nav se ela tiver fundo */
+    display: block; /* Garante que o logo ocupe espaço */
 }
 
 .logo-img {
@@ -83,9 +81,10 @@ body {
 .nav {
     display: flex;
     gap: 30px;
-    /* A navegação deve estar à esquerda ou à direita no desktop */
-    /* Para centralizar o logo, vamos remover o 'order' aqui e deixar a navegação na ordem natural */
-    /* order: 1; Removido */
+    /* Margens automáticas para centralizar o logo entre a navegação */
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 2; /* Garante que a nav não cubra o logo se ela tiver um background */
 }
 
 .nav-link {
@@ -166,29 +165,30 @@ body {
 
 /* BOTÃO "FALE COMIGO" FLUTUANTE E FIXO - MOVIDO PARA ESQUERDA */
 #fixed-contact-button {
-    position: fixed; /* Fixa o botão na tela */
-    bottom: 30px; /* 30px do rodapé */
+    position: fixed; 
+    bottom: 30px; 
     left: 30px; /* **ALTERADO: 30px da esquerda** */
+    right: auto; /* Garante que não haja conflito com 'right' */
     background: var(--azul-marinho);
     color: var(--branco-puro);
     padding: 12px 24px;
-    border-radius: 50px; /* Para um formato de pílula, arredondado */
+    border-radius: 50px; 
     text-decoration: none;
     font-family: var(--font-primary);
     font-weight: 600;
     font-size: 16px;
     transition: var(--transition);
-    display: flex; /* Para alinhar ícone e texto se houver */
+    display: flex; 
     align-items: center;
     justify-content: center;
     box-shadow: 0 8px 20px rgba(27, 54, 93, 0.4);
-    z-index: 1050; /* Um z-index alto para garantir que fique acima de outros elementos */
-    white-space: nowrap; /* Evita quebra de linha */
+    z-index: 1050; 
+    white-space: nowrap; 
     cursor: pointer;
 }
 
 #fixed-contact-button:hover {
-    background: var(--verde-crescimento); /* Cor de destaque ao passar o mouse */
+    background: var(--verde-crescimento); 
     transform: translateY(-3px);
     box-shadow: 0 12px 25px rgba(27, 54, 93, 0.5);
 }
@@ -477,7 +477,7 @@ body {
 
 .servico-card .card-icon span {
     font-size: 24px;
-    color: var(--branco-puro); /* Adicionado cor para o ícone */
+    color: var(--branco-puro); 
 }
 
 .servico-card h3 {
@@ -543,7 +543,7 @@ body {
 
 .diferencial-icon span {
     font-size: 24px;
-    color: var(--branco-puro); /* Adicionado cor para o ícone */
+    color: var(--branco-puro); 
 }
 
 .diferencial-text h3 {
@@ -831,16 +831,18 @@ body {
     }
 
     .header-content {
-        justify-content: space-between; 
+        justify-content: space-between; /* Mantém espaço entre menu e logo no mobile */
         padding: 0 16px;
         height: 100%;
+        position: relative; /* Necessário para posicionar o logo absolutamente dentro dele */
     }
 
     .logo {
-        position: absolute; 
+        position: absolute; /* Usamos absolute para centralizar o logo no mobile */
         left: 50%;
         transform: translateX(-50%);
         margin: 0; 
+        z-index: 5; /* Garante que o logo esteja acima de tudo */
     }
 
     .logo-img {
@@ -849,8 +851,8 @@ body {
 
     .mobile-menu-button { 
         display: block !important; 
-        z-index: 10; 
-        order: 1; /* Força o botão para a esquerda, antes do logo */
+        z-index: 10; /* Botão do menu com alto z-index */
+        order: 1; /* Força o botão para a esquerda */
     }
 
     .nav {
@@ -870,7 +872,7 @@ body {
         justify-content: flex-start; 
         gap: 15px; 
         align-items: flex-start; 
-        /* order: 3; Removido, a ordem não importa tanto aqui pois ele está fora do fluxo normal do header-content */
+        z-index: 999; /* Menu com alto z-index, mas abaixo do botão e logo */
     }
     
     .nav.mobile-nav-open {
@@ -900,8 +902,8 @@ body {
         padding: 10px 20px; 
         font-size: 14px; 
         bottom: 20px;
-        left: 20px; /* **ALTERADO: 20px da esquerda no mobile** */
-        right: auto; /* Remove a regra 'right' para não conflitar */
+        left: 20px; 
+        right: auto; 
     }
 
     .hero-content {
