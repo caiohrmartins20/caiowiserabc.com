@@ -117,68 +117,91 @@ function animateCounter(element, target, duration = 2000) {
     updateCounter();
 }
 
-// MENU MOBILE (se necessário)
-function createMobileMenu() {
-    const header = document.querySelector('.header-content');
+// MENU MOBILE (Revisado para layout específico)
+function setupHeaderLayout() {
+    const headerContent = document.querySelector('.header-content');
     const nav = document.querySelector('.nav');
-    
+    const logo = document.querySelector('.logo'); // Assumindo que você tem uma div com classe 'logo' envolvendo a imagem
+    const ctaButton = document.querySelector('.header .btn-primary, .header .btn-secondary'); // Pega o botão CTA no header
+
+    // Verifica se os elementos essenciais foram encontrados
+    if (!headerContent || !nav || !logo || !ctaButton) {
+        console.warn("Elementos do cabeçalho (header-content, nav, logo ou cta-button) não encontrados. Verifique as classes HTML.");
+        // Retorna para evitar erros se os elementos não existirem
+        return; 
+    }
+
     // Cria botão do menu mobile
     const menuButton = document.createElement('button');
     menuButton.className = 'mobile-menu-button';
     menuButton.innerHTML = '☰';
     menuButton.style.cssText = `
-        display: none;
         background: none;
         border: none;
-        font-size: 24px;
+        font-size: 28px; /* Um pouco maior para mobile */
         color: var(--azul-marinho);
         cursor: pointer;
-        padding: 10px;
+        padding: 0; /* Remove padding padrão */
+        display: none; /* Escondido por padrão, mostrado via CSS @media */
+        z-index: 10; /* Garante que esteja acima do logo no mobile */
     `;
-    
-    // Adiciona o botão ao header
-    header.appendChild(menuButton);
-    
+
+    // Reorganiza a ordem dos elementos no header para garantir o layout
+    // Cria um fragmento para otimizar a manipulação do DOM
+    const fragment = document.createDocumentFragment();
+
+    // Adiciona o botão do menu (será o primeiro à esquerda)
+    fragment.appendChild(menuButton);
+
+    // Adiciona o logo (será centralizado via CSS)
+    fragment.appendChild(logo); 
+
+    // Adiciona o botão CTA (será o último à direita)
+    fragment.appendChild(ctaButton);
+
+    // Limpa o headerContent e adiciona os elementos na nova ordem
+    headerContent.innerHTML = ''; // Limpa o conteúdo existente
+    headerContent.appendChild(fragment);
+
     // Toggle do menu
     menuButton.addEventListener('click', function() {
         nav.classList.toggle('mobile-nav-open');
-    });
-    
-    // CSS para menu mobile
-    const mobileStyles = document.createElement('style');
-    mobileStyles.textContent = `
-        @media (max-width: 768px) {
-            .mobile-menu-button {
-                display: block !important;
-            }
-            
-            .nav {
-                position: absolute;
-                top: 100%;
+        // Adiciona/remove um overlay para fechar o menu ao clicar fora
+        if (nav.classList.contains('mobile-nav-open')) {
+            const overlay = document.createElement('div');
+            overlay.className = 'mobile-menu-overlay';
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
                 left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-            }
-            
-            .nav.mobile-nav-open {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0,0,0,0.5);
+                z-index: 990; /* Abaixo do menu, acima do conteúdo */
+            `;
+            document.body.appendChild(overlay);
+
+            overlay.addEventListener('click', () => {
+                nav.classList.remove('mobile-nav-open');
+                overlay.remove();
+            });
+        } else {
+            document.querySelector('.mobile-menu-overlay')?.remove();
         }
-    `;
-    document.head.appendChild(mobileStyles);
+    });
+
+    // Fecha o menu ao clicar em um link (apenas no mobile)
+    nav.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            // Verifica se está em tela mobile (menos ou igual a 768px)
+            if (window.innerWidth <= 768) {
+                nav.classList.remove('mobile-nav-open');
+                document.querySelector('.mobile-menu-overlay')?.remove();
+            }
+        });
+    });
 }
 
-// Inicializa menu mobile
-createMobileMenu();
 
 // LAZY LOADING PARA IMAGENS (quando adicionar imagens reais)
 function lazyLoadImages() {
@@ -201,7 +224,7 @@ function lazyLoadImages() {
 // SCROLL TO TOP
 function createScrollToTop() {
     const scrollButton = document.createElement('button');
-    scrollButton.innerHTML = '⏳';
+    scrollButton.innerHTML = '⬆️'; // Alterado para uma seta para cima, mais intuitivo
     scrollButton.className = 'scroll-to-top';
     scrollButton.style.cssText = `
         position: fixed;
@@ -253,8 +276,7 @@ function createPreloader() {
     preloader.className = 'preloader';
     preloader.innerHTML = `
         <div class="preloader-content">
-            <div class="preloader-logo">⏳</div>
-            <div class="preloader-text">Carregando...</div>
+            <div class="preloader-logo">📈</div> <div class="preloader-text">Carregando...</div>
         </div>
     `;
     preloader.style.cssText = `
@@ -325,6 +347,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializa funcionalidades
     lazyLoadImages();
     initAnalytics();
+    setupHeaderLayout(); // Chama a nova função de setup do header aqui
 });
 
 // PERFORMANCE MONITORING
