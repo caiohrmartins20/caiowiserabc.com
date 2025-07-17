@@ -145,22 +145,14 @@ function setupHeaderLayout() {
     `;
 
     // Reorganiza a ordem dos elementos no header para garantir o layout
-    // No desktop: Menu (order 1) - Logo (order 2) - Espaço vazio (não há um item 3, então o espaço é flexível)
-    // No mobile: Botão Menu (order 1) - Logo (order 2, centralizado) - Nav (order 3, hidden)
-    const fragment = document.createDocumentFragment();
-
-    // Adiciona o botão do menu (será o primeiro à esquerda no mobile)
-    fragment.appendChild(menuButton);
-
-    // Adiciona o logo (será o segundo item)
-    fragment.appendChild(logo); 
-
-    // Adiciona o nav (será o terceiro item)
-    fragment.appendChild(nav);
-
-    // Limpa o headerContent e adiciona os elementos na nova ordem
-    headerContent.innerHTML = ''; 
-    headerContent.appendChild(fragment);
+    // No desktop: Menu (esquerda) - Logo (centro, absolute) - Nav (direita)
+    // No mobile: Botão Menu (esquerda) - Logo (centro, absolute) - Nav (fora de tela)
+    // Para o desktop, o `justify-content: space-between;` no `.header-content` e o `position: absolute;` do `.logo`
+    // já tratam o layout. O `appendChild` apenas garante que os elementos estejam presentes.
+    headerContent.innerHTML = ''; // Limpa antes de adicionar
+    headerContent.appendChild(menuButton); // Adiciona o botão do menu
+    headerContent.appendChild(logo); // Adiciona o logo
+    headerContent.appendChild(nav); // Adiciona o nav
 
     // Toggle do menu
     menuButton.addEventListener('click', function() {
@@ -251,7 +243,7 @@ function createScrollToTop() {
     scrollButton.style.cssText = `
         position: fixed;
         bottom: 30px;
-        right: 30px;
+        right: 30px; /* Mantido à direita para não conflitar com o botão "Fale Comigo" */
         width: 50px;
         height: 50px;
         border-radius: 50%;
