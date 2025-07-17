@@ -44,7 +44,7 @@ body {
     height: 100px;
     background: var(--branco-puro);
     box-shadow: 0 2px 20px rgba(27, 54, 93, 0.1);
-    position: fixed;
+    position: fixed; /* Garante que o header esteja fixo */
     top: 0;
     left: 0;
     right: 0;
@@ -55,18 +55,30 @@ body {
 .header-content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 15px 0;
+    justify-content: space-between; /* Distribui os itens: menu, logo, botão */
+    padding: 15px 20px; /* Ajuste para dar espaço nas laterais */
+    position: relative; /* Para posicionar o logo no centro */
+    height: 100%; /* Garante que o conteúdo ocupe a altura do header */
+}
+
+.logo {
+    position: absolute; /* Posiciona o logo de forma absoluta */
+    left: 50%; /* Começa no centro horizontal */
+    transform: translateX(-50%); /* Centraliza exatamente */
+    z-index: 1; /* Garante que o logo fique acima dos outros elementos se houver sobreposição */
 }
 
 .logo-img {
     height: 80px;
     width: auto;
+    filter: none; /* **REMOVIDO QUALQUER FILTRO QUE PODE ESCURECER OU CLAREAR O LOGO** */
+    background: none; /* **GARANTE QUE NÃO TENHA FUNDO** */
 }
 
 .nav {
     display: flex;
     gap: 30px;
+    /* Ajustes para mobile serão feitos na media query */
 }
 
 .nav-link {
@@ -293,16 +305,15 @@ body {
     border-radius: var(--border-radius);
     border: 2px solid var(--prata-premium);
     margin: 0 auto;
-  }
+}
   
-  .sobre-img {
+.sobre-img {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Preenche sem distorcer, cortando o excesso */
     display: block;
-  }
+}
   
-
 .sobre-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -513,25 +524,25 @@ body {
 .slider-container {
     position: relative;
     overflow: hidden;
-  }
+}
   
-  .depoimentos-slider {
+.depoimentos-slider {
     display: flex;
     gap: 30px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     padding-bottom: 20px;
-  }
+}
   
-  .depoimento-card {
+.depoimento-card {
     min-width: 300px;
     max-width: 300px;
     scroll-snap-align: start;
     flex-shrink: 0;
-  }
+}
   
-  .slider-btn {
+.slider-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -543,19 +554,19 @@ body {
     cursor: pointer;
     z-index: 2;
     font-size: 20px;
-  }
+}
   
-  .slider-btn.prev {
+.slider-btn.prev {
     left: 10px;
-  }
+}
   
-  .slider-btn.next {
+.slider-btn.next {
     right: 10px;
-  }
+}
   
-  .slider-btn:hover {
+.slider-btn:hover {
     background: var(--prata-premium);
-  }
+}
 .depoimentos {
     background: var(--cinza-claro);
     padding: var(--section-padding);
@@ -777,41 +788,67 @@ body {
 
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
+    .header {
+        height: 80px; /* Altura menor para mobile */
+    }
+
     .header-content {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        justify-content: space-between; /* Mantém espaço entre menu e botão */
         padding: 0 16px;
-        position: relative;
-        height: 80px;
+        height: 100%;
+        /* O logo já é centralizado por position absolute */
     }
 
-    .logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+    /* O logo já está centralizado com 'position: absolute' */
+    .logo-img {
+        height: 60px; /* Reduz o tamanho do logo no mobile */
     }
 
-    .logo img {
-        height: 40px;
-    }
-
-    .menu-toggle {
-        font-size: 28px;
-        background: none;
-        border: none;
-        color: var(--azul-marinho);
-    }
-
-    .cta-button {
-        font-size: 14px;
-        padding: 8px 16px;
+    .mobile-menu-button { /* Este botão será criado via JS */
+        display: block !important; /* Mostra o botão do menu sanduíche */
+        z-index: 10; /* Garante que ele esteja acima de outros elementos */
+        order: -1; /* Força o botão para a esquerda, antes do logo */
     }
 
     .nav {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
+        position: fixed; /* Fixa o menu lateralmente */
+        top: 80px; /* Abaixo do header */
+        left: 0;
+        width: 100%; /* Ocupa a largura total */
+        height: calc(100vh - 80px); /* Ocupa o restante da tela */
+        background: var(--branco-puro); /* Fundo branco para o menu */
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        transform: translateX(-100%); /* Esconde o menu para a esquerda */
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        justify-content: flex-start; /* Alinha itens ao topo */
+        gap: 15px; /* Menor espaçamento entre links */
+        align-items: flex-start; /* Alinha links à esquerda */
+    }
+    
+    .nav.mobile-nav-open {
+        transform: translateX(0); /* Mostra o menu */
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .nav-link {
+        font-size: 18px; /* Aumenta tamanho do texto no menu mobile */
+        width: 100%; /* Links ocupam toda a largura */
+        padding: 10px 0;
+    }
+    .nav-link::after {
+        left: 0;
+        width: 100%; /* Underline total no mobile */
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+    .nav-link:hover::after {
+        transform: scaleX(1);
     }
     
     .hero-content {
