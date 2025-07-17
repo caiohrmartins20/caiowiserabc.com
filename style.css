@@ -71,8 +71,8 @@ body {
 .logo-img {
     height: 80px;
     width: auto;
-    filter: none; /* **REMOVIDO QUALQUER FILTRO QUE PODE ESCURECER OU CLAREAR O LOGO** */
-    background: none; /* **GARANTE QUE NÃO TENHA FUNDO** */
+    filter: none; /* REMOVIDO QUALQUER FILTRO QUE PODE ESCURECER OU CLAREAR O LOGO */
+    background: none; /* GARANTE QUE NÃO TENHA FUNDO */
 }
 
 .nav {
@@ -114,12 +114,12 @@ body {
 .btn-primary {
     background: var(--azul-marinho);
     color: var(--branco-puro);
-    padding: 12px 24px;
+    padding: 12px 24px; /* Padding padrão para outros botões */
     border-radius: var(--border-radius);
     text-decoration: none;
     font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 16px; /* Tamanho da fonte padrão para outros botões */
     transition: var(--transition);
     display: inline-block;
     border: 2px solid var(--azul-marinho);
@@ -131,6 +131,15 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(27, 54, 93, 0.3);
 }
+
+/* NOVO ESTILO PARA O BOTÃO "CONTATO" NO HEADER */
+.header .btn-primary {
+    padding: 8px 18px; /* Reduz o padding para deixá-lo menor */
+    font-size: 14px; /* Reduz o tamanho da fonte */
+    white-space: nowrap; /* Evita que o texto quebre em várias linhas */
+    margin-left: 20px; /* Adiciona uma margem para separar do logo (desktop) */
+}
+
 
 .btn-secondary {
     background: transparent;
@@ -851,6 +860,14 @@ body {
         transform: scaleX(1);
     }
     
+    /* ESTILO PARA O BOTÃO NO HEADER EM MOBILE */
+    .header .btn-primary {
+        padding: 6px 12px; /* Ainda menor no mobile para mais espaço */
+        font-size: 12px; /* Fonte menor no mobile */
+        margin-left: 10px; /* Menor margem no mobile */
+        z-index: 10; /* Garante que o botão esteja acima de outros elementos se houver sobreposição */
+    }
+
     .hero-content {
         grid-template-columns: 1fr;
         text-align: center;
