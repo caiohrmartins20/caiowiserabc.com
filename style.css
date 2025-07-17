@@ -991,3 +991,31 @@ html {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(27, 54, 93, 0.2);
 }
+
+/* REGRAS FINAIS PARA GARANTIR A VISIBILIDADE DO LOGO */
+.logo-img {
+    display: block !important; /* Garante que a imagem não esteja hidden */
+    visibility: visible !important; /* Garante que a imagem não esteja invisível */
+    opacity: 1 !important; /* Garante que a imagem não esteja transparente */
+    max-width: 100% !important; /* Garante que a imagem não seja cortada por largura */
+    height: auto !important; /* Mantém a proporção da imagem */
+}
+
+.logo {
+    display: flex !important; /* Garante que o contêiner do logo seja um flex container */
+    align-items: center !important; /* Centraliza verticalmente o logo */
+    justify-content: center !important; /* Centraliza horizontalmente o logo */
+    min-width: 80px; /* Garante um tamanho mínimo para o logo */
+    min-height: 80px; /* Garante um tamanho mínimo para o logo */
+}
+
+/* No mobile, re-aplica o posicionamento absoluto para centralização */
+@media (max-width: 768px) {
+    .logo {
+        position: absolute !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        z-index: 5 !important;
+    }
+}
