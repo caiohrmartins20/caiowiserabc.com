@@ -145,10 +145,8 @@ function setupHeaderLayout() {
     `;
 
     // Reorganiza a ordem dos elementos no header para garantir o layout
-    // No desktop: Menu (esquerda) - Logo (centro, absolute) - Nav (direita)
+    // No desktop: Menu (esquerda) - Logo (centro) - Nav (direita)
     // No mobile: Botão Menu (esquerda) - Logo (centro, absolute) - Nav (fora de tela)
-    // Para o desktop, o `justify-content: space-between;` no `.header-content` e o `position: absolute;` do `.logo`
-    // já tratam o layout. O `appendChild` apenas garante que os elementos estejam presentes.
     headerContent.innerHTML = ''; // Limpa antes de adicionar
     headerContent.appendChild(menuButton); // Adiciona o botão do menu
     headerContent.appendChild(logo); // Adiciona o logo
