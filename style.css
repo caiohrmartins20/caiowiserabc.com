@@ -31,6 +31,7 @@ body {
     line-height: 1.6;
     color: var(--cinza-corporativo);
     overflow-x: hidden;
+    padding-top: 0; /* Removido o padding-top que compensava o header fixo */
 }
 
 .container {
@@ -39,12 +40,12 @@ body {
     padding: 0 20px;
 }
 
-/* HEADER */
+/* HEADER - ALTERADO PARA CENTRALIZAR E NÃO SER FIXO */
 .header {
     height: 100px;
     background: var(--branco-puro);
     box-shadow: 0 2px 20px rgba(27, 54, 93, 0.1);
-    position: fixed; /* Garante que o header esteja fixo */
+    position: relative; /* Alterado de fixed para relative */
     top: 0;
     left: 0;
     right: 0;
@@ -55,30 +56,30 @@ body {
 .header-content {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Distribui os itens: menu, logo, botão */
-    padding: 15px 20px; /* Ajuste para dar espaço nas laterais */
-    position: relative; /* Para posicionar o logo no centro */
-    height: 100%; /* Garante que o conteúdo ocupe a altura do header */
+    justify-content: center; /* ALTERADO: Centraliza todos os itens do cabeçalho */
+    padding: 15px 20px;
+    position: relative;
+    height: 100%;
 }
 
 .logo {
-    position: absolute; /* Posiciona o logo de forma absoluta */
-    left: 50%; /* Começa no centro horizontal */
-    transform: translateX(-50%); /* Centraliza exatamente */
-    z-index: 1; /* Garante que o logo fique acima dos outros elementos se houver sobreposição */
+    position: static; /* ALTERADO: Remove position absolute para centralizar via flexbox */
+    transform: none; /* ALTERADO: Remove transform para centralizar via flexbox */
+    order: 2; /* Para garantir que o logo fique no meio (depois do menu, antes do botão, no layout flex) */
+    margin: 0 30px; /* Adiciona espaçamento entre o logo e outros elementos */
 }
 
 .logo-img {
     height: 80px;
     width: auto;
-    filter: none; /* REMOVIDO QUALQUER FILTRO QUE PODE ESCURECER OU CLAREAR O LOGO */
-    background: none; /* GARANTE QUE NÃO TENHA FUNDO */
+    filter: none;
+    background: none;
 }
 
 .nav {
     display: flex;
     gap: 30px;
-    /* Ajustes para mobile serão feitos na media query */
+    order: 1; /* Coloca a navegação antes do logo no desktop */
 }
 
 .nav-link {
@@ -114,12 +115,12 @@ body {
 .btn-primary {
     background: var(--azul-marinho);
     color: var(--branco-puro);
-    padding: 12px 24px; /* Padding padrão para outros botões */
+    padding: 12px 24px;
     border-radius: var(--border-radius);
     text-decoration: none;
     font-family: var(--font-primary);
     font-weight: 600;
-    font-size: 16px; /* Tamanho da fonte padrão para outros botões */
+    font-size: 16px;
     transition: var(--transition);
     display: inline-block;
     border: 2px solid var(--azul-marinho);
@@ -132,14 +133,7 @@ body {
     box-shadow: 0 8px 25px rgba(27, 54, 93, 0.3);
 }
 
-/* NOVO ESTILO PARA O BOTÃO "CONTATO" NO HEADER */
-.header .btn-primary {
-    padding: 8px 18px; /* Reduz o padding para deixá-lo menor */
-    font-size: 14px; /* Reduz o tamanho da fonte */
-    white-space: nowrap; /* Evita que o texto quebre em várias linhas */
-    margin-left: 20px; /* Adiciona uma margem para separar do logo (desktop) */
-}
-
+/* REMOVIDO: Antigo estilo para o botão "Contato" no cabeçalho. Agora ele é um botão fixo separado. */
 
 .btn-secondary {
     background: transparent;
@@ -166,11 +160,41 @@ body {
     font-size: 18px;
 }
 
+/* NOVO: BOTÃO "FALE COMIGO" FLUTUANTE E FIXO */
+#fixed-contact-button {
+    position: fixed; /* Fixa o botão na tela */
+    bottom: 30px; /* 30px do rodapé */
+    right: 30px; /* 30px da direita */
+    background: var(--azul-marinho);
+    color: var(--branco-puro);
+    padding: 12px 24px;
+    border-radius: 50px; /* Para um formato de pílula, arredondado */
+    text-decoration: none;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 16px;
+    transition: var(--transition);
+    display: flex; /* Para alinhar ícone e texto se houver */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 20px rgba(27, 54, 93, 0.4);
+    z-index: 1050; /* Um z-index alto para garantir que fique acima de outros elementos */
+    white-space: nowrap; /* Evita quebra de linha */
+    cursor: pointer;
+}
+
+#fixed-contact-button:hover {
+    background: var(--verde-crescimento); /* Cor de destaque ao passar o mouse */
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(27, 54, 93, 0.5);
+}
+
+
 /* HERO SECTION */
 .hero {
     background: var(--branco-puro);
     padding: 120px 0 80px;
-    padding-top: 100px;
+    /* padding-top: 100px; - REMOVIDO, não precisamos mais compensar o header fixo */
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -860,12 +884,12 @@ body {
         transform: scaleX(1);
     }
     
-    /* ESTILO PARA O BOTÃO NO HEADER EM MOBILE */
-    .header .btn-primary {
-        padding: 6px 12px; /* Ainda menor no mobile para mais espaço */
-        font-size: 12px; /* Fonte menor no mobile */
-        margin-left: 10px; /* Menor margem no mobile */
-        z-index: 10; /* Garante que o botão esteja acima de outros elementos se houver sobreposição */
+    /* ESTILO PARA O BOTÃO FIXO EM MOBILE */
+    #fixed-contact-button {
+        padding: 10px 20px; /* Ajuste o padding para mobile */
+        font-size: 14px; /* Ajuste o tamanho da fonte para mobile */
+        bottom: 20px;
+        right: 20px;
     }
 
     .hero-content {
