@@ -12,17 +12,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// HEADER SCROLL EFFECT
-window.addEventListener('scroll', function() {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.backdropFilter = 'blur(10px)';
-    } else {
-        header.style.background = '#FFFFFF';
-        header.style.backdropFilter = 'none';
-    }
-});
+// HEADER SCROLL EFFECT - REMOVIDO
+// Como o header não é mais fixo, este efeito de scroll no header não faz mais sentido.
+// Se você quiser um efeito similar para algo no topo, me avise.
+
 
 // FORMULÁRIO DE CONTATO
 document.querySelector('.contact-form').addEventListener('submit', function(e) {
@@ -114,20 +107,24 @@ function animateCounter(element, target, duration = 2000) {
         }
     }
     
-    updateCounter();
+    // ATENÇÃO: Se as estatísticas são no HERO, elas podem ser animadas no DOMContentLoaded
+    // Se elas estiverem mais para baixo na página, você pode querer observá-las com IntersectionObserver também.
+    // Exemplo de como chamar se as stats estiverem no início (Hero Section):
+    // const statNumber1 = document.querySelector('.hero-stats .stat:nth-child(1) .stat-number');
+    // const statNumber2 = document.querySelector('.hero-stats .stat:nth-child(2) .stat-number');
+    // if (statNumber1) animateCounter(statNumber1, 200);
+    // if (statNumber2) animateCounter(statNumber2, 10000000); // 10 Milhões
 }
 
 // MENU MOBILE (Revisado para layout específico)
 function setupHeaderLayout() {
     const headerContent = document.querySelector('.header-content');
     const nav = document.querySelector('.nav');
-    const logo = document.querySelector('.logo'); // Assumindo que você tem uma div com classe 'logo' envolvendo a imagem
-    const ctaButton = document.querySelector('.header .btn-primary, .header .btn-secondary'); // Pega o botão CTA no header
+    const logo = document.querySelector('.logo'); 
 
     // Verifica se os elementos essenciais foram encontrados
-    if (!headerContent || !nav || !logo || !ctaButton) {
-        console.warn("Elementos do cabeçalho (header-content, nav, logo ou cta-button) não encontrados. Verifique as classes HTML.");
-        // Retorna para evitar erros se os elementos não existirem
+    if (!headerContent || !nav || !logo) {
+        console.warn("Elementos do cabeçalho (header-content, nav ou logo) não encontrados. Verifique as classes HTML.");
         return; 
     }
 
@@ -138,35 +135,34 @@ function setupHeaderLayout() {
     menuButton.style.cssText = `
         background: none;
         border: none;
-        font-size: 28px; /* Um pouco maior para mobile */
+        font-size: 28px;
         color: var(--azul-marinho);
         cursor: pointer;
-        padding: 0; /* Remove padding padrão */
+        padding: 0;
         display: none; /* Escondido por padrão, mostrado via CSS @media */
-        z-index: 10; /* Garante que esteja acima do logo no mobile */
+        z-index: 10;
+        order: 1; /* Posiciona o botão do menu à esquerda (primeiro item flex) */
     `;
 
     // Reorganiza a ordem dos elementos no header para garantir o layout
-    // Cria um fragmento para otimizar a manipulação do DOM
     const fragment = document.createDocumentFragment();
 
     // Adiciona o botão do menu (será o primeiro à esquerda)
     fragment.appendChild(menuButton);
 
-    // Adiciona o logo (será centralizado via CSS)
+    // Adiciona o logo (será centralizado via CSS com order: 2)
     fragment.appendChild(logo); 
 
-    // Adiciona o botão CTA (será o último à direita)
-    fragment.appendChild(ctaButton);
+    // Adiciona o nav (será o terceiro item no desktop, à direita)
+    fragment.appendChild(nav);
 
     // Limpa o headerContent e adiciona os elementos na nova ordem
-    headerContent.innerHTML = ''; // Limpa o conteúdo existente
+    headerContent.innerHTML = ''; 
     headerContent.appendChild(fragment);
 
     // Toggle do menu
     menuButton.addEventListener('click', function() {
         nav.classList.toggle('mobile-nav-open');
-        // Adiciona/remove um overlay para fechar o menu ao clicar fora
         if (nav.classList.contains('mobile-nav-open')) {
             const overlay = document.createElement('div');
             overlay.className = 'mobile-menu-overlay';
@@ -177,7 +173,7 @@ function setupHeaderLayout() {
                 width: 100vw;
                 height: 100vh;
                 background: rgba(0,0,0,0.5);
-                z-index: 990; /* Abaixo do menu, acima do conteúdo */
+                z-index: 990;
             `;
             document.body.appendChild(overlay);
 
@@ -193,12 +189,36 @@ function setupHeaderLayout() {
     // Fecha o menu ao clicar em um link (apenas no mobile)
     nav.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
-            // Verifica se está em tela mobile (menos ou igual a 768px)
             if (window.innerWidth <= 768) {
                 nav.classList.remove('mobile-nav-open');
                 document.querySelector('.mobile-menu-overlay')?.remove();
             }
         });
+    });
+}
+
+// NOVA FUNÇÃO: CRIA E GERENCIA O BOTÃO "FALE COMIGO" FIXO
+function createFixedContactButton() {
+    const fixedButton = document.createElement('a');
+    fixedButton.id = 'fixed-contact-button'; // ID para estilização CSS
+    fixedButton.href = '#contato'; // Link para a seção de contato ou WhatsApp
+    fixedButton.textContent = 'Fale Comigo 💬'; // Texto com emoji para destaque
+
+    document.body.appendChild(fixedButton); // Adiciona o botão ao corpo da página
+    
+    // Adiciona evento de clique para rolagem suave (se for para a seção de contato)
+    fixedButton.addEventListener('click', function(e) {
+        // Verifica se o href é uma âncora interna
+        if (this.getAttribute('href').startsWith('#')) {
+            e.preventDefault(); // Previne o comportamento padrão do link
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
     });
 }
 
@@ -224,7 +244,7 @@ function lazyLoadImages() {
 // SCROLL TO TOP
 function createScrollToTop() {
     const scrollButton = document.createElement('button');
-    scrollButton.innerHTML = '⬆️'; // Alterado para uma seta para cima, mais intuitivo
+    scrollButton.innerHTML = '⬆️';
     scrollButton.className = 'scroll-to-top';
     scrollButton.style.cssText = `
         position: fixed;
@@ -249,6 +269,7 @@ function createScrollToTop() {
     
     // Mostra/esconde botão baseado no scroll
     window.addEventListener('scroll', function() {
+        // Ajusta a visibilidade para não conflitar com o fixed-contact-button no mobile se estiverem muito próximos
         if (window.scrollY > 500) {
             scrollButton.style.opacity = '1';
             scrollButton.style.visibility = 'visible';
@@ -276,7 +297,8 @@ function createPreloader() {
     preloader.className = 'preloader';
     preloader.innerHTML = `
         <div class="preloader-content">
-            <div class="preloader-logo">📈</div> <div class="preloader-text">Carregando...</div>
+            <div class="preloader-logo">📈</div>
+            <div class="preloader-text">Carregando...</div>
         </div>
     `;
     preloader.style.cssText = `
@@ -335,7 +357,6 @@ createPreloader();
 
 // ANALYTICS E TRACKING (placeholder)
 function initAnalytics() {
-    // Aqui você pode adicionar Google Analytics, Facebook Pixel, etc.
     console.log('Analytics inicializado');
 }
 
@@ -347,7 +368,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicializa funcionalidades
     lazyLoadImages();
     initAnalytics();
-    setupHeaderLayout(); // Chama a nova função de setup do header aqui
+    setupHeaderLayout(); // Chama a função de setup do header (centraliza, organiza menu/logo)
+    createFixedContactButton(); // Chama a função para criar o botão "Fale Comigo" fixo
 });
 
 // PERFORMANCE MONITORING
