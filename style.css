@@ -31,7 +31,7 @@ body {
     line-height: 1.6;
     color: var(--cinza-corporativo);
     overflow-x: hidden;
-    padding-top: 0; /* Removido o padding-top que compensava o header fixo */
+    padding-top: 0; 
 }
 
 .container {
@@ -56,18 +56,21 @@ body {
 .header-content {
     display: flex;
     align-items: center;
-    justify-content: center; /* **MANTIDO: Centraliza os itens do cabeçalho no desktop** */
+    /* Ajuste para alinhar os itens e o logo visivelmente */
+    justify-content: space-between; /* Permite que os elementos se espalhem */
     padding: 15px 20px;
     position: relative;
     height: 100%;
 }
 
 .logo {
-    /* **AJUSTADO: Reset de transform e position para o logo se comportar como um item flex normal** */
-    position: static; 
-    transform: none; 
-    order: 2; /* Garante que o logo fique no meio (depois do menu, antes do elemento do botão, no layout flexbox do desktop) */
-    margin: 0 30px; /* Adiciona espaçamento entre o logo e outros elementos */
+    /* Ajustado para centralizar o logo no fluxo flexbox */
+    position: absolute; /* Usamos absolute para centralizar o logo independentemente da nav */
+    left: 50%;
+    transform: translateX(-50%);
+    order: 0; /* Remove a ordem do logo, pois o absolute o tira do fluxo */
+    margin: 0; /* Remove margem que possa interferir na centralização */
+    z-index: 1; /* Garante que o logo esteja acima da nav se ela não estiver ativa */
 }
 
 .logo-img {
@@ -80,7 +83,9 @@ body {
 .nav {
     display: flex;
     gap: 30px;
-    order: 1; /* Coloca a navegação antes do logo no desktop */
+    /* A navegação deve estar à esquerda ou à direita no desktop */
+    /* Para centralizar o logo, vamos remover o 'order' aqui e deixar a navegação na ordem natural */
+    /* order: 1; Removido */
 }
 
 .nav-link {
@@ -159,11 +164,11 @@ body {
     font-size: 18px;
 }
 
-/* BOTÃO "FALE COMIGO" FLUTUANTE E FIXO */
+/* BOTÃO "FALE COMIGO" FLUTUANTE E FIXO - MOVIDO PARA ESQUERDA */
 #fixed-contact-button {
     position: fixed; /* Fixa o botão na tela */
     bottom: 30px; /* 30px do rodapé */
-    right: 30px; /* 30px da direita */
+    left: 30px; /* **ALTERADO: 30px da esquerda** */
     background: var(--azul-marinho);
     color: var(--branco-puro);
     padding: 12px 24px;
@@ -472,6 +477,7 @@ body {
 
 .servico-card .card-icon span {
     font-size: 24px;
+    color: var(--branco-puro); /* Adicionado cor para o ícone */
 }
 
 .servico-card h3 {
@@ -537,6 +543,7 @@ body {
 
 .diferencial-icon span {
     font-size: 24px;
+    color: var(--branco-puro); /* Adicionado cor para o ícone */
 }
 
 .diferencial-text h3 {
@@ -820,67 +827,66 @@ body {
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
     .header {
-        height: 80px; /* Altura menor para mobile */
+        height: 80px; 
     }
 
     .header-content {
-        justify-content: space-between; /* Mantém espaço entre menu e logo no mobile */
+        justify-content: space-between; 
         padding: 0 16px;
         height: 100%;
     }
 
     .logo {
-        order: 2; /* Mantém o logo no centro para mobile */
-        position: absolute; /* Para centralizar com mais precisão no mobile */
+        position: absolute; 
         left: 50%;
         transform: translateX(-50%);
-        margin: 0; /* Remove margem extra */
+        margin: 0; 
     }
 
     .logo-img {
-        height: 60px; /* Reduz o tamanho do logo no mobile */
+        height: 60px; 
     }
 
-    .mobile-menu-button { /* Este botão será criado via JS */
-        display: block !important; /* Mostra o botão do menu sanduíche */
-        z-index: 10; /* Garante que ele esteja acima de outros elementos */
+    .mobile-menu-button { 
+        display: block !important; 
+        z-index: 10; 
         order: 1; /* Força o botão para a esquerda, antes do logo */
     }
 
     .nav {
-        position: fixed; /* Fixa o menu lateralmente */
-        top: 80px; /* Abaixo do header */
+        position: fixed; 
+        top: 80px; 
         left: 0;
-        width: 100%; /* Ocupa a largura total */
-        height: calc(100vh - 80px); /* Ocupa o restante da tela */
-        background: var(--branco-puro); /* Fundo branco para o menu */
+        width: 100%; 
+        height: calc(100vh - 80px); 
+        background: var(--branco-puro); 
         flex-direction: column;
         padding: 20px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        transform: translateX(-100%); /* Esconde o menu para a esquerda */
+        transform: translateX(-100%); 
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
-        justify-content: flex-start; /* Alinha itens ao topo */
-        gap: 15px; /* Menor espaçamento entre links */
-        align-items: flex-start; /* Alinha links à esquerda */
-        order: 3; /* Coloca a navegação depois do logo no mobile, mas ela estará fora de vista */
+        justify-content: flex-start; 
+        gap: 15px; 
+        align-items: flex-start; 
+        /* order: 3; Removido, a ordem não importa tanto aqui pois ele está fora do fluxo normal do header-content */
     }
     
     .nav.mobile-nav-open {
-        transform: translateX(0); /* Mostra o menu */
+        transform: translateX(0); 
         opacity: 1;
         visibility: visible;
     }
     
     .nav-link {
-        font-size: 18px; /* Aumenta tamanho do texto no menu mobile */
-        width: 100%; /* Links ocupam toda a largura */
+        font-size: 18px; 
+        width: 100%; 
         padding: 10px 0;
     }
     .nav-link::after {
         left: 0;
-        width: 100%; /* Underline total no mobile */
+        width: 100%; 
         transform: scaleX(0);
         transform-origin: left;
         transition: transform 0.3s ease;
@@ -889,12 +895,13 @@ body {
         transform: scaleX(1);
     }
     
-    /* ESTILO PARA O BOTÃO FIXO EM MOBILE */
+    /* ESTILO PARA O BOTÃO FIXO EM MOBILE - MOVIDO PARA ESQUERDA */
     #fixed-contact-button {
-        padding: 10px 20px; /* Ajuste o padding para mobile */
-        font-size: 14px; /* Ajuste o tamanho da fonte para mobile */
+        padding: 10px 20px; 
+        font-size: 14px; 
         bottom: 20px;
-        right: 20px;
+        left: 20px; /* **ALTERADO: 20px da esquerda no mobile** */
+        right: auto; /* Remove a regra 'right' para não conflitar */
     }
 
     .hero-content {
