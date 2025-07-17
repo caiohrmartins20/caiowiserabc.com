@@ -145,15 +145,17 @@ function setupHeaderLayout() {
     `;
 
     // Reorganiza a ordem dos elementos no header para garantir o layout
+    // No desktop: Menu (order 1) - Logo (order 2) - Espaço vazio (não há um item 3, então o espaço é flexível)
+    // No mobile: Botão Menu (order 1) - Logo (order 2, centralizado) - Nav (order 3, hidden)
     const fragment = document.createDocumentFragment();
 
-    // Adiciona o botão do menu (será o primeiro à esquerda)
+    // Adiciona o botão do menu (será o primeiro à esquerda no mobile)
     fragment.appendChild(menuButton);
 
-    // Adiciona o logo (será centralizado via CSS com order: 2)
+    // Adiciona o logo (será o segundo item)
     fragment.appendChild(logo); 
 
-    // Adiciona o nav (será o terceiro item no desktop, à direita)
+    // Adiciona o nav (será o terceiro item)
     fragment.appendChild(nav);
 
     // Limpa o headerContent e adiciona os elementos na nova ordem
@@ -377,4 +379,3 @@ window.addEventListener('load', function() {
     const loadTime = performance.now();
     console.log(`⚡ Página carregada em ${Math.round(loadTime)}ms`);
 });
-
