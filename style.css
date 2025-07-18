@@ -73,7 +73,7 @@ body {
 
 .logo-img {
     height: auto; /* Ajusta a altura automaticamente */
-    max-height: 65px; /* Aumentado ligeiramente a altura máxima para desktop */
+    max-height: 75px; /* *** ALTERAÇÃO AQUI: Aumentado para 75px para desktop *** */
     width: auto;
     filter: none;
     background: none;
@@ -775,7 +775,8 @@ body {
 }
 
 .footer-logo-img {
-    height: 40px;
+    /* *** ALTERAÇÃO AQUI: Aumentado para 50px para o rodapé *** */
+    height: 50px; 
     width: auto;
     margin-bottom: 15px;
     filter: brightness(0) invert(1);
@@ -848,7 +849,7 @@ body {
 
     .logo-img {
         height: auto; /* Ajusta a altura automaticamente */
-        max-height: 45px; /* Aumentado ligeiramente a altura máxima para mobile */
+        max-height: 55px; /* *** ALTERAÇÃO AQUI: Aumentado para 55px para mobile *** */
     }
 
     .mobile-menu-button { 
