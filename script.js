@@ -1,21 +1,196 @@
+// Variáveis globais
+let currentSlide = 0;
+const totalSlides = 13; // Total de depoimentos
 
-// NAVEGAÇÃO SUAVE
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
+// Inicialização quando a página carrega
+document.addEventListener('DOMContentLoaded', function() {
+    initializeCarousel();
+    initializeForm();
+    initializePatrimonioSelection();
+    initializeSmoothScroll();
 });
 
-// HEADER SCROLL EFFECT
+// ========== CARROSSEL DE DEPOIMENTOS ==========
+function initializeCarousel() {
+    // Auto-play do carrossel (opcional)
+    setInterval(() => {
+        moveCarousel(1);
+    }, 8000); // Muda a cada 8 segundos
+}
+
+function moveCarousel(direction) {
+    const track = document.querySelector('.carousel-track');
+    const dots = document.querySelectorAll('.dot');
+    
+    // Remove classe active de todos os dots
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    // Atualiza slide atual
+    currentSlide += direction;
+    
+    // Loop infinito
+    if (currentSlide >= totalSlides) {
+        currentSlide = 0;
+    } else if (currentSlide < 0) {
+        currentSlide = totalSlides - 1;
+    }
+    
+    // Move o carrossel
+    const translateX = -currentSlide * 100;
+    track.style.transform = `translateX(${translateX}%)`;
+    
+    // Ativa o dot correspondente
+    if (dots[currentSlide]) {
+        dots[currentSlide].classList.add('active');
+    }
+}
+
+function currentSlide(slideIndex) {
+    const track = document.querySelector('.carousel-track');
+    const dots = document.querySelectorAll('.dot');
+    
+    // Remove classe active de todos os dots
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    // Atualiza slide atual
+    currentSlide = slideIndex - 1;
+    
+    // Move o carrossel
+    const translateX = -currentSlide * 100;
+    track.style.transform = `translateX(${translateX}%)`;
+    
+    // Ativa o dot correspondente
+    if (dots[currentSlide]) {
+        dots[currentSlide].classList.add('active');
+    }
+}
+
+// ========== SELEÇÃO DE PATRIMÔNIO ==========
+function initializePatrimonioSelection() {
+    const patrimonioCards = document.querySelectorAll('.patrimonio-card');
+    const faixaInput = document.getElementById('faixa');
+    
+    patrimonioCards.forEach(card => {
+        card.addEventListener('click', function() {
+            // Remove seleção anterior
+            patrimonioCards.forEach(c => c.classList.remove('selected'));
+            
+            // Adiciona seleção atual
+            this.classList.add('selected');
+            
+            // Atualiza campo hidden
+            const faixa = this.getAttribute('data-faixa');
+            faixaInput.value = faixa;
+        });
+    });
+}
+
+// ========== FORMULÁRIO DE CONTATO ==========
+function initializeForm() {
+    const form = document.getElementById('contactForm');
+    
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Coleta dados do formulário
+        const formData = new FormData(form);
+        const nome = formData.get('nome');
+        const email = formData.get('email');
+        const telefone = formData.get('telefone');
+        const faixa = formData.get('faixa');
+        const mensagem = formData.get('mensagem');
+        
+        // Validação básica
+        if (!nome || !email || !telefone) {
+            alert('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+        
+        // Monta mensagem para WhatsApp
+        let whatsappMessage = `Olá Caio! Vim através do seu site.\n\n`;
+        whatsappMessage += `*Nome:* ${nome}\n`;
+        whatsappMessage += `*E-mail:* ${email}\n`;
+        whatsappMessage += `*Telefone:* ${telefone}\n`;
+        
+        if (faixa) {
+            const faixaTexto = getFaixaTexto(faixa);
+            whatsappMessage += `*Faixa de Patrimônio:* ${faixaTexto}\n`;
+        }
+        
+        if (mensagem) {
+            whatsappMessage += `*Mensagem:* ${mensagem}\n`;
+        }
+        
+        whatsappMessage += `\nGostaria de conversar sobre investimentos!`;
+        
+        // Codifica mensagem para URL
+        const encodedMessage = encodeURIComponent(whatsappMessage);
+        
+        // Abre WhatsApp
+        const whatsappURL = `https://wa.me/5511941174028?text=${encodedMessage}`;
+        window.open(whatsappURL, '_blank');
+        
+        // Feedback visual
+        showSuccessMessage();
+        
+        // Reset do formulário
+        form.reset();
+        document.querySelectorAll('.patrimonio-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+    });
+}
+
+function getFaixaTexto(faixa) {
+    const faixas = {
+        'starter': 'Starter (R$ 100k - R$ 300k)',
+        'medium': 'Medium (R$ 300k - R$ 1M)',
+        'high': 'High (R$ 1M - R$ 5M)',
+        'private': 'Private (R$ 5M+)'
+    };
+    return faixas[faixa] || 'Não informado';
+}
+
+function showSuccessMessage() {
+    const button = document.querySelector('.btn-submit');
+    const originalText = button.textContent;
+    
+    button.textContent = 'Redirecionando para WhatsApp...';
+    button.style.background = '#25D366'; // Cor do WhatsApp
+    
+    setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = '';
+    }, 3000);
+}
+
+// ========== SCROLL SUAVE ==========
+function initializeSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const offsetTop = targetSection.offsetTop - 80; // Compensa header fixo
+                
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// ========== HEADER DINÂMICO ==========
 window.addEventListener('scroll', function() {
-    const header = document.querySelector('.header');
+    const header = document.querySelector('.header-fixed');
+    
     if (window.scrollY > 100) {
         header.style.background = 'rgba(255, 255, 255, 0.95)';
         header.style.backdropFilter = 'blur(10px)';
@@ -25,646 +200,139 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// FORMULÁRIO DE CONTATO
-document.querySelector('.contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Coleta os dados do formulário
-    const formData = {
-        nome: document.getElementById('nome').value,
-        email: document.getElementById('email').value,
-        telefone: document.getElementById('telefone').value,
-        interesse: document.getElementById('interesse').value,
-        patrimonio: document.getElementById('patrimonio').value,
-        mensagem: document.getElementById('mensagem').value
+// ========== ANIMAÇÕES DE ENTRADA ==========
+function initializeAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
     };
     
-    // Validação básica
-    if (!formData.nome || !formData.email || !formData.telefone || !formData.interesse|| !formData.patrimonio) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
-        return;
-    }
-    
-    // Cria mensagem para WhatsApp
-    const whatsappMessage = `
-🏦 *NOVO CONTATO - CAIO MARTINS*
-
-👤 *Nome:* ${formData.nome}
-📧 *Email:* ${formData.email}
-📱 *Telefone:* ${formData.telefone}
-🎯 *Interesse:* ${formData.interesse}
-🏦*Patrimonio:* ${formData.patrimonio}
-💬 *Mensagem:*
-${formData.mensagem}
-
-⏳ _Enviado através do site - ${new Date().toLocaleString('pt-BR')}_
-    `.trim();
-    
-    // Codifica a mensagem para URL
-    const encodedMessage = encodeURIComponent(whatsappMessage);
-    
-    // Número do WhatsApp (substitua pelo número real)
-    const whatsappNumber = '551194117-4028'; // Formato: 55 + DDD + número
-    
-    // Abre WhatsApp
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-    window.open(whatsappURL, '_blank');
-    
-    // Feedback para o usuário
-    alert('Redirecionando para o WhatsApp! Sua mensagem foi preparada automaticamente.');
-    
-    // Limpa o formulário
-    this.reset();
-});
-
-// ANIMAÇÕES AO SCROLL
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observa elementos para animação
-document.querySelectorAll('.servico-card, .diferencial-item, .depoimento-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
-
-// CONTADOR ANIMADO PARA ESTATÍSTICAS
-function animateCounter(element, target, duration = 2000) {
-    let start = 0;
-    const increment = target / (duration / 16);
-    
-    function updateCounter() {
-        start += increment;
-        if (start < target) {
-            element.textContent = Math.floor(start).toLocaleString('pt-BR');
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = target.toLocaleString('pt-BR');
-        }
-    }
-    
-    updateCounter();
-}
-
-// MENU MOBILE (se necessário)
-function createMobileMenu() {
-    const header = document.querySelector('.header-content');
-    const nav = document.querySelector('.nav');
-    
-    // Cria botão do menu mobile
-    const menuButton = document.createElement('button');
-    menuButton.className = 'mobile-menu-button';
-    menuButton.innerHTML = '☰';
-    menuButton.style.cssText = `
-        display: none;
-        background: none;
-        border: none;
-        font-size: 24px;
-        color: var(--azul-marinho);
-        cursor: pointer;
-        padding: 10px;
-    `;
-    
-    // Adiciona o botão ao header
-    header.appendChild(menuButton);
-    
-    // Toggle do menu
-    menuButton.addEventListener('click', function() {
-        nav.classList.toggle('mobile-nav-open');
-    });
-    
-    // CSS para menu mobile
-    const mobileStyles = document.createElement('style');
-    mobileStyles.textContent = `
-        @media (max-width: 768px) {
-            .mobile-menu-button {
-                display: block !important;
-            }
-            
-            .nav {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-                transform: translateY(-100%);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s ease;
-            }
-            
-            .nav.mobile-nav-open {
-                transform: translateY(0);
-                opacity: 1;
-                visibility: visible;
-            }
-        }
-    `;
-    document.head.appendChild(mobileStyles);
-}
-
-// Inicializa menu mobile
-createMobileMenu();
-
-// LAZY LOADING PARA IMAGENS (quando adicionar imagens reais)
-function lazyLoadImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
-    });
+    }, observerOptions);
     
-    images.forEach(img => imageObserver.observe(img));
-}
-
-// SCROLL TO TOP
-function createScrollToTop() {
-    const scrollButton = document.createElement('button');
-    scrollButton.innerHTML = '⏳';
-    scrollButton.className = 'scroll-to-top';
-    scrollButton.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: var(--azul-marinho);
-        color: white;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(27, 54, 93, 0.3);
-    `;
-    
-    document.body.appendChild(scrollButton);
-    
-    // Mostra/esconde botão baseado no scroll
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
-            scrollButton.style.opacity = '1';
-            scrollButton.style.visibility = 'visible';
-        } else {
-            scrollButton.style.opacity = '0';
-            scrollButton.style.visibility = 'hidden';
-        }
-    });
-    
-    // Scroll to top ao clicar
-    scrollButton.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+    // Observa elementos para animação
+    const animatedElements = document.querySelectorAll('.diferencial-card, .pilar-card, .servico-card');
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
     });
 }
 
-// Inicializa scroll to top
-createScrollToTop();
+// Inicializa animações quando a página carrega
+document.addEventListener('DOMContentLoaded', initializeAnimations);
 
-// PRELOADER (opcional)
-function createPreloader() {
-    const preloader = document.createElement('div');
-    preloader.className = 'preloader';
-    preloader.innerHTML = `
-        <div class="preloader-content">
-            <div class="preloader-logo">⏳</div>
-            <div class="preloader-text">Carregando...</div>
-        </div>
-    `;
-    preloader.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease;
-    `;
-    
-    const preloaderStyles = document.createElement('style');
-    preloaderStyles.textContent = `
-        .preloader-content {
-            text-align: center;
-        }
-        
-        .preloader-logo {
-            font-size: 48px;
-            margin-bottom: 20px;
-            animation: pulse 1.5s infinite;
-        }
-        
-        .preloader-text {
-            font-family: var(--font-primary);
-            font-weight: 600;
-            color: var(--azul-marinho);
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-    `;
-    document.head.appendChild(preloaderStyles);
-    document.body.appendChild(preloader);
-    
-    // Remove preloader quando página carregar
-    window.addEventListener('load', function() {
-        setTimeout(() => {
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.remove();
-            }, 500);
-        }, 1000);
-    });
+// ========== UTILITÁRIOS ==========
+
+// Função para validar email
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
 }
 
-// Inicializa preloader
-createPreloader();
-
-// ANALYTICS E TRACKING (placeholder)
-function initAnalytics() {
-    // Aqui você pode adicionar Google Analytics, Facebook Pixel, etc.
-    console.log('Analytics inicializado');
+// Função para formatar telefone
+function formatPhone(phone) {
+    const cleaned = phone.replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{2})(\d{4,5})(\d{4})$/);
+    if (match) {
+        return `(${match[1]}) ${match[2]}-${match[3]}`;
+    }
+    return phone;
 }
 
-// INICIALIZAÇÃO
+// Máscara para telefone
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Landing Page Caio Martins carregada com sucesso!');
-    console.log('⏳ Resultados Reais para Pessoas Reais');
+    const phoneInput = document.getElementById('telefone');
     
-    // Inicializa funcionalidades
-    lazyLoadImages();
-    initAnalytics();
-});
-
-// PERFORMANCE MONITORING
-window.addEventListener('load', function() {
-    const loadTime = performance.now();
-    console.log(`⚡ Página carregada em ${Math.round(loadTime)}ms`);
-});
-
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if (value.length <= 11) {
+                if (value.length <= 2) {
+                    value = value.replace(/(\d{2})/, '($1');
+                } else if (value.length <= 6) {
+                    value = value.replace(/(\d{2})(\d{4})/, '($1) $2');
+                } else if (value.length <= 10) {
+                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+                } else {
+                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                }
+            }
+            
+            e.target.value = value;
+        });
     }
-    
-    // Cria mensagem para WhatsApp
-    const whatsappMessage = `
-🏦 *NOVO CONTATO - CAIO MARTINS*
-
-👤 *Nome:* ${formData.nome}
-📧 *Email:* ${formData.email}
-📱 *Telefone:* ${formData.telefone}
-🎯 *Interesse:* ${formData.interesse}
-🏦*Patrimonio:* ${formData.patrimonio}
-💬 *Mensagem:*
-${formData.mensagem}
-
-⏳ _Enviado através do site - ${new Date().toLocaleString('pt-BR')}_
-    `.trim();
-    
-    // Codifica a mensagem para URL
-    const encodedMessage = encodeURIComponent(whatsappMessage);
-    
-    // Número do WhatsApp (substitua pelo número real)
-    const whatsappNumber = '551194117-4028'; // Formato: 55 + DDD + número
-    
-    // Abre WhatsApp
-    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-    window.open(whatsappURL, '_blank');
-    
-    // Feedback para o usuário
-    alert('Redirecionando para o WhatsApp! Sua mensagem foi preparada automaticamente.');
-    
-    // Limpa o formulário
-    this.reset();
 });
 
-// ANIMAÇÕES AO SCROLL
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observa elementos para animação
-document.querySelectorAll('.servico-card, .diferencial-item, .depoimento-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
-
-// CONTADOR ANIMADO PARA ESTATÍSTICAS
-function animateCounter(element, target, duration = 2000) {
-    let start = 0;
-    const increment = target / (duration / 16);
+// ========== MENU MOBILE ==========
+function initializeMobileMenu() {
+    // Se precisar de menu hambúrguer no futuro
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
     
-    function updateCounter() {
-        start += increment;
-        if (start < target) {
-            element.textContent = Math.floor(start).toLocaleString('pt-BR');
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = target.toLocaleString('pt-BR');
-        }
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
     }
-    
-    // ATENÇÃO: Se as estatísticas são no HERO, elas podem ser animadas no DOMContentLoaded
-    // Se elas estiverem mais para baixo na página, você pode querer observá-las com IntersectionObserver também.
-    // Exemplo de como chamar se as stats estiverem no início (Hero Section):
-    // const statNumber1 = document.querySelector('.hero-stats .stat:nth-child(1) .stat-number');
-    // const statNumber2 = document.querySelector('.hero-stats .stat:nth-child(2) .stat-number');
-    // if (statNumber1) animateCounter(statNumber1, 200);
-    // if (statNumber2) animateCounter(statNumber2, 10000000); // 10 Milhões
 }
 
-// MENU MOBILE (Revisado para layout específico)
-function setupHeaderLayout() {
-    const headerContent = document.querySelector('.header-content');
-    const nav = document.querySelector('.nav');
-    const logo = document.querySelector('.logo'); 
+// ========== PERFORMANCE ==========
 
-    // Verifica se os elementos essenciais foram encontrados
-    if (!headerContent || !nav || !logo) {
-        console.warn("Elementos do cabeçalho (header-content, nav ou logo) não encontrados. Verifique as classes HTML.");
-        return; 
-    }
-
-    // Cria botão do menu mobile
-    const menuButton = document.createElement('button');
-    menuButton.className = 'mobile-menu-button';
-    menuButton.innerHTML = '☰';
-    menuButton.style.cssText = `
-        background: none;
-        border: none;
-        font-size: 28px;
-        color: var(--azul-marinho);
-        cursor: pointer;
-        padding: 0;
-        display: none; /* Escondido por padrão, mostrado via CSS @media */
-        z-index: 10;
-        order: 1; /* Posiciona o botão do menu à esquerda (primeiro item flex) */
-    `;
-
-    // Reorganiza a ordem dos elementos no header para garantir o layout
-    // No desktop: Menu (esquerda) - Logo (centro) - Nav (direita)
-    // No mobile: Botão Menu (esquerda) - Logo (centro, absolute) - Nav (fora de tela)
-    headerContent.innerHTML = ''; // Limpa antes de adicionar
-    headerContent.appendChild(menuButton); // Adiciona o botão do menu
-    headerContent.appendChild(logo); // Adiciona o logo
-    headerContent.appendChild(nav); // Adiciona o nav
-
-    // Toggle do menu
-    menuButton.addEventListener('click', function() {
-        nav.classList.toggle('mobile-nav-open');
-        if (nav.classList.contains('mobile-nav-open')) {
-            const overlay = document.createElement('div');
-            overlay.className = 'mobile-menu-overlay';
-            overlay.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                background: rgba(0,0,0,0.5);
-                z-index: 990;
-            `;
-            document.body.appendChild(overlay);
-
-            overlay.addEventListener('click', () => {
-                nav.classList.remove('mobile-nav-open');
-                overlay.remove();
+// Lazy loading para imagens (se necessário no futuro)
+function initializeLazyLoading() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
             });
-        } else {
-            document.querySelector('.mobile-menu-overlay')?.remove();
-        }
-    });
-
-    // Fecha o menu ao clicar em um link (apenas no mobile)
-    nav.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                nav.classList.remove('mobile-nav-open');
-                document.querySelector('.mobile-menu-overlay')?.remove();
-            }
         });
-    });
-}
-
-// NOVA FUNÇÃO: CRIA E GERENCIA O BOTÃO "FALE COMIGO" FIXO
-function createFixedContactButton() {
-    const fixedButton = document.createElement('a');
-    fixedButton.id = 'fixed-contact-button'; // ID para estilização CSS
-    fixedButton.href = '#contato'; // Link para a seção de contato ou WhatsApp
-    fixedButton.textContent = 'Fale Comigo 💬'; // Texto com emoji para destaque
-
-    document.body.appendChild(fixedButton); // Adiciona o botão ao corpo da página
-    
-    // Adiciona evento de clique para rolagem suave (se for para a seção de contato)
-    fixedButton.addEventListener('click', function(e) {
-        // Verifica se o href é uma âncora interna
-        if (this.getAttribute('href').startsWith('#')) {
-            e.preventDefault(); // Previne o comportamento padrão do link
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
-    });
-}
-
-
-// LAZY LOADING PARA IMAGENS (quando adicionar imagens reais)
-function lazyLoadImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
-            }
+        
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
         });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
+    }
 }
 
-// SCROLL TO TOP
-function createScrollToTop() {
-    const scrollButton = document.createElement('button');
-    scrollButton.innerHTML = '⬆️';
-    scrollButton.className = 'scroll-to-top';
-    scrollButton.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px; /* Mantido à direita para não conflitar com o botão "Fale Comigo" */
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: var(--azul-marinho);
-        color: white;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        box-shadow: 0 4px 15px rgba(27, 54, 93, 0.3);
-    `;
-    
-    document.body.appendChild(scrollButton);
-    
-    // Mostra/esconde botão baseado no scroll
-    window.addEventListener('scroll', function() {
-        // Ajusta a visibilidade para não conflitar com o fixed-contact-button no mobile se estiverem muito próximos
-        if (window.scrollY > 500) {
-            scrollButton.style.opacity = '1';
-            scrollButton.style.visibility = 'visible';
-        } else {
-            scrollButton.style.opacity = '0';
-            scrollButton.style.visibility = 'hidden';
-        }
-    });
-    
-    // Scroll to top ao clicar
-    scrollButton.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+// ========== ANALYTICS (para implementação futura) ==========
+function trackEvent(eventName, eventData = {}) {
+    // Implementar Google Analytics ou similar
+    console.log('Event tracked:', eventName, eventData);
+}
+
+// Rastrear cliques importantes
+document.addEventListener('click', function(e) {
+    if (e.target.matches('.cta-button, .cta-primary, .btn-submit')) {
+        trackEvent('CTA_Click', {
+            element: e.target.textContent,
+            page: window.location.pathname
         });
-    });
-}
-
-// Inicializa scroll to top
-createScrollToTop();
-
-// PRELOADER (opcional)
-function createPreloader() {
-    const preloader = document.createElement('div');
-    preloader.className = 'preloader';
-    preloader.innerHTML = `
-        <div class="preloader-content">
-            <div class="preloader-logo">📈</div>
-            <div class="preloader-text">Carregando...</div>
-        </div>
-    `;
-    preloader.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease;
-    `;
-    
-    const preloaderStyles = document.createElement('style');
-    preloaderStyles.textContent = `
-        .preloader-content {
-            text-align: center;
-        }
-        
-        .preloader-logo {
-            font-size: 48px;
-            margin-bottom: 20px;
-            animation: pulse 1.5s infinite;
-        }
-        
-        .preloader-text {
-            font-family: var(--font-primary);
-            font-weight: 600;
-            color: var(--azul-marinho);
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-    `;
-    document.head.appendChild(preloaderStyles);
-    document.body.appendChild(preloader);
-    
-    // Remove preloader quando página carregar
-    window.addEventListener('load', function() {
-        setTimeout(() => {
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.remove();
-            }, 500);
-        }, 1000);
-    });
-}
-
-// Inicializa preloader
-createPreloader();
-
-// ANALYTICS E TRACKING (placeholder)
-function initAnalytics() {
-    console.log('Analytics inicializado');
-}
-
-// INICIALIZAÇÃO
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Landing Page Caio Martins carregada com sucesso!');
-    console.log('⏳ Resultados Reais para Pessoas Reais');
-    
-    // Inicializa funcionalidades
-    lazyLoadImages();
-    initAnalytics();
-    setupHeaderLayout(); // Chama a função de setup do header (centraliza, organiza menu/logo)
-    createFixedContactButton(); // Chama a função para criar o botão "Fale Comigo" fixo
+    }
 });
 
-// PERFORMANCE MONITORING
-window.addEventListener('load', function() {
-    const loadTime = performance.now();
-    console.log(`⚡ Página carregada em ${Math.round(loadTime)}ms`);
+// ========== CONSOLE LOG PARA DEBUG ==========
+console.log('🚀 Site do Caio Martins carregado com sucesso!');
+console.log('⏳ Resultados Reais para Pessoas Reais');
+
+// Previne erros em produção
+window.addEventListener('error', function(e) {
+    console.error('Erro capturado:', e.error);
 });
+
+// ========== EXPORTAR FUNÇÕES GLOBAIS ==========
+window.moveCarousel = moveCarousel;
+window.currentSlide = currentSlide;
+
