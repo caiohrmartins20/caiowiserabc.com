@@ -120,10 +120,6 @@ p {
     height: 55px; /* Logo maior */
     width: auto;
     object-fit: contain;
-    background: var(--branco);
-    padding: var(--spacing-xs);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* Menu Desktop */
@@ -741,10 +737,6 @@ p {
 .footer-logo img {
     height: 60px;
     margin-bottom: var(--spacing-sm);
-    background: var(--azul-marinho);
-    padding: var(--spacing-sm);
-    border-radius: 8px;
-    filter: brightness(0) invert(1); /* Torna o logo branco */
 }
 
 .footer-logo p {
