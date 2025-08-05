@@ -173,16 +173,26 @@ function sendEmail(emailData) {
 }
 
 function sendWhatsApp(data) {
+    // Função para capitalizar primeira letra
+    function capitalizeFirst(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    }
+    
+    // Função para deixar em minúscula
+    function toLowerCase(str) {
+        return str.toLowerCase();
+    }
+    
     const message = `
-Olá Caio! Vim através do seu site.
+Olá, Caio! Vim através do seu site.
 
-*Nome:* ${data.nome}
-*E-mail:* ${data.email}
-*Telefone:* ${data.telefone}
-*Faixa de Patrimônio:* ${data.patrimonio}
-*Objetivos:* ${data.objetivos || 'Não informado'}
+Nome: ${capitalizeFirst(data.nome)}
+E-mail: ${toLowerCase(data.email)}
+Telefone: ${data.telefone}
+Faixa de Patrimônio: ${toLowerCase(data.patrimonio)}
+Objetivos: ${toLowerCase(data.objetivos || 'não informado')}
 
-Gostaria de conversar sobre investimentos!
+Gostaria de agendar uma conversa com você.
     `;
     
     const whatsappNumber = '5511941174028';
