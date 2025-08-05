@@ -1,171 +1,209 @@
 // Variáveis globais
 let currentSlide = 0;
-const totalSlides = 13; // Total de depoimentos
+const slides = document.querySelectorAll('.depoimento-card');
+const indicators = document.querySelectorAll('.indicator');
+let autoSlideInterval;
 
-// Inicialização quando a página carrega
+// Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
-    initializeCarousel();
-    initializeForm();
-    initializePatrimonioSelection();
-    initializeSmoothScroll();
+    initCarousel();
+    initForm();
+    initMobileMenu();
 });
 
-// ========== CARROSSEL DE DEPOIMENTOS ==========
-function initializeCarousel() {
-    // Auto-play do carrossel (opcional)
-    setInterval(() => {
-        moveCarousel(1);
-    }, 8000); // Muda a cada 8 segundos
-}
+// ===== CARROSSEL DE DEPOIMENTOS =====
 
-function moveCarousel(direction) {
-    const track = document.querySelector('.carousel-track');
-    const dots = document.querySelectorAll('.dot');
+function initCarousel() {
+    if (slides.length === 0) return;
     
-    // Remove classe active de todos os dots
-    dots.forEach(dot => dot.classList.remove('active'));
+    showSlide(0);
+    startAutoSlide();
     
-    // Atualiza slide atual
-    currentSlide += direction;
-    
-    // Loop infinito
-    if (currentSlide >= totalSlides) {
-        currentSlide = 0;
-    } else if (currentSlide < 0) {
-        currentSlide = totalSlides - 1;
-    }
-    
-    // Move o carrossel
-    const translateX = -currentSlide * 100;
-    track.style.transform = `translateX(${translateX}%)`;
-    
-    // Ativa o dot correspondente
-    if (dots[currentSlide]) {
-        dots[currentSlide].classList.add('active');
+    // Pausar auto-slide quando hover no carrossel
+    const carousel = document.querySelector('.carousel-container');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', stopAutoSlide);
+        carousel.addEventListener('mouseleave', startAutoSlide);
     }
 }
 
-function currentSlide(slideIndex) {
-    const track = document.querySelector('.carousel-track');
-    const dots = document.querySelectorAll('.dot');
-    
-    // Remove classe active de todos os dots
-    dots.forEach(dot => dot.classList.remove('active'));
-    
-    // Atualiza slide atual
-    currentSlide = slideIndex - 1;
-    
-    // Move o carrossel
-    const translateX = -currentSlide * 100;
-    track.style.transform = `translateX(${translateX}%)`;
-    
-    // Ativa o dot correspondente
-    if (dots[currentSlide]) {
-        dots[currentSlide].classList.add('active');
-    }
-}
-
-// ========== SELEÇÃO DE PATRIMÔNIO ==========
-function initializePatrimonioSelection() {
-    const patrimonioCards = document.querySelectorAll('.patrimonio-card');
-    const faixaInput = document.getElementById('faixa');
-    
-    patrimonioCards.forEach(card => {
-        card.addEventListener('click', function() {
-            // Remove seleção anterior
-            patrimonioCards.forEach(c => c.classList.remove('selected'));
-            
-            // Adiciona seleção atual
-            this.classList.add('selected');
-            
-            // Atualiza campo hidden
-            const faixa = this.getAttribute('data-faixa');
-            faixaInput.value = faixa;
-        });
+function showSlide(n) {
+    // Esconder todos os slides
+    slides.forEach(slide => {
+        slide.classList.remove('active');
+        slide.style.display = 'none';
     });
-}
-
-// ========== FORMULÁRIO DE CONTATO ==========
-function initializeForm() {
-    const form = document.getElementById('contactForm');
     
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Coleta dados do formulário
-        const formData = new FormData(form);
-        const nome = formData.get('nome');
-        const email = formData.get('email');
-        const telefone = formData.get('telefone');
-        const faixa = formData.get('faixa');
-        const mensagem = formData.get('mensagem');
-        
-        // Validação básica
-        if (!nome || !email || !telefone) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
-            return;
-        }
-        
-        // Monta mensagem para WhatsApp
-        let whatsappMessage = `Olá Caio! Vim através do seu site.\n\n`;
-        whatsappMessage += `*Nome:* ${nome}\n`;
-        whatsappMessage += `*E-mail:* ${email}\n`;
-        whatsappMessage += `*Telefone:* ${telefone}\n`;
-        
-        if (faixa) {
-            const faixaTexto = getFaixaTexto(faixa);
-            whatsappMessage += `*Faixa de Patrimônio:* ${faixaTexto}\n`;
-        }
-        
-        if (mensagem) {
-            whatsappMessage += `*Mensagem:* ${mensagem}\n`;
-        }
-        
-        whatsappMessage += `\nGostaria de conversar sobre investimentos!`;
-        
-        // Codifica mensagem para URL
-        const encodedMessage = encodeURIComponent(whatsappMessage);
-        
-        // Abre WhatsApp
-        const whatsappURL = `https://wa.me/5511941174028?text=${encodedMessage}`;
-        window.open(whatsappURL, '_blank');
-        
-        // Feedback visual
-        showSuccessMessage();
-        
-        // Reset do formulário
-        form.reset();
-        document.querySelectorAll('.patrimonio-card').forEach(card => {
-            card.classList.remove('selected');
-        });
+    // Remover active de todos os indicadores
+    indicators.forEach(indicator => {
+        indicator.classList.remove('active');
     });
+    
+    // Ajustar índice se necessário
+    if (n >= slides.length) currentSlide = 0;
+    if (n < 0) currentSlide = slides.length - 1;
+    
+    // Mostrar slide atual
+    if (slides[currentSlide]) {
+        slides[currentSlide].classList.add('active');
+        slides[currentSlide].style.display = 'flex';
+    }
+    
+    // Ativar indicador correspondente
+    if (indicators[currentSlide]) {
+        indicators[currentSlide].classList.add('active');
+    }
 }
 
-function getFaixaTexto(faixa) {
-    const faixas = {
-        'starter': 'Starter (R$ 100k - R$ 300k)',
-        'medium': 'Medium (R$ 300k - R$ 1M)',
-        'high': 'High (R$ 1M - R$ 5M)',
-        'private': 'Private (R$ 5M+)'
+function nextSlide() {
+    currentSlide++;
+    showSlide(currentSlide);
+    resetAutoSlide();
+}
+
+function prevSlide() {
+    currentSlide--;
+    showSlide(currentSlide);
+    resetAutoSlide();
+}
+
+function currentSlideFunc(n) {
+    currentSlide = n - 1;
+    showSlide(currentSlide);
+    resetAutoSlide();
+}
+
+function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+        nextSlide();
+    }, 8000); // 8 segundos
+}
+
+function stopAutoSlide() {
+    clearInterval(autoSlideInterval);
+}
+
+function resetAutoSlide() {
+    stopAutoSlide();
+    startAutoSlide();
+}
+
+// ===== MENU MOBILE =====
+
+function initMobileMenu() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', toggleMobileMenu);
+    }
+}
+
+function toggleMobileMenu() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (mobileMenu && menuToggle) {
+        mobileMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
+    }
+}
+
+function closeMobileMenu() {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const menuToggle = document.querySelector('.menu-toggle');
+    
+    if (mobileMenu && menuToggle) {
+        mobileMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
+    }
+}
+
+// ===== FORMULÁRIO DE CONTATO =====
+
+function initForm() {
+    const form = document.getElementById('contatoForm');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+    }
+}
+
+function handleFormSubmit(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    
+    // Validação básica
+    if (!data.nome || !data.email || !data.telefone || !data.patrimonio) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+    }
+    
+    // Preparar dados para envio
+    const emailData = {
+        to: 'caio.martins@wiseaai.com.br',
+        subject: `Novo contato do site - ${data.nome}`,
+        body: `
+Nome: ${data.nome}
+E-mail: ${data.email}
+Telefone: ${data.telefone}
+Faixa de Patrimônio: ${data.patrimonio}
+Objetivos: ${data.objetivos || 'Não informado'}
+
+Enviado através do site caiowiserabc.com
+Data: ${new Date().toLocaleString('pt-BR')}
+        `
     };
-    return faixas[faixa] || 'Não informado';
+    
+    // Enviar por email (usando mailto como fallback)
+    sendEmail(emailData);
+    
+    // Também redirecionar para WhatsApp
+    sendWhatsApp(data);
 }
 
-function showSuccessMessage() {
-    const button = document.querySelector('.btn-submit');
-    const originalText = button.textContent;
+function sendEmail(emailData) {
+    const subject = encodeURIComponent(emailData.subject);
+    const body = encodeURIComponent(emailData.body);
+    const mailtoLink = `mailto:${emailData.to}?subject=${subject}&body=${body}`;
     
-    button.textContent = 'Redirecionando para WhatsApp...';
-    button.style.background = '#25D366'; // Cor do WhatsApp
+    // Tentar abrir cliente de email
+    window.open(mailtoLink, '_blank');
+}
+
+function sendWhatsApp(data) {
+    const message = `
+Olá Caio! Vim através do seu site.
+
+*Nome:* ${data.nome}
+*E-mail:* ${data.email}
+*Telefone:* ${data.telefone}
+*Faixa de Patrimônio:* ${data.patrimonio}
+*Objetivos:* ${data.objetivos || 'Não informado'}
+
+Gostaria de conversar sobre investimentos!
+    `;
     
+    const whatsappNumber = '5511941174028';
+    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    
+    // Mostrar mensagem de sucesso
+    alert('Formulário enviado! Você será redirecionado para o WhatsApp.');
+    
+    // Redirecionar para WhatsApp após 1 segundo
     setTimeout(() => {
-        button.textContent = originalText;
-        button.style.background = '';
-    }, 3000);
+        window.open(whatsappLink, '_blank');
+    }, 1000);
+    
+    // Limpar formulário
+    document.getElementById('contatoForm').reset();
 }
 
-// ========== SCROLL SUAVE ==========
-function initializeSmoothScroll() {
+// ===== SCROLL SUAVE =====
+
+// Adicionar scroll suave para links internos
+document.addEventListener('DOMContentLoaded', function() {
     const links = document.querySelectorAll('a[href^="#"]');
     
     links.forEach(link => {
@@ -173,166 +211,85 @@ function initializeSmoothScroll() {
             e.preventDefault();
             
             const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+            const targetElement = document.querySelector(targetId);
             
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80; // Compensa header fixo
+            if (targetElement) {
+                const headerHeight = document.querySelector('.header-fixed').offsetHeight;
+                const targetPosition = targetElement.offsetTop - headerHeight - 20;
                 
                 window.scrollTo({
-                    top: offsetTop,
+                    top: targetPosition,
                     behavior: 'smooth'
                 });
+                
+                // Fechar menu mobile se estiver aberto
+                closeMobileMenu();
             }
         });
     });
-}
-
-// ========== HEADER DINÂMICO ==========
-window.addEventListener('scroll', function() {
-    const header = document.querySelector('.header-fixed');
-    
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.backdropFilter = 'blur(10px)';
-    } else {
-        header.style.background = '#FFFFFF';
-        header.style.backdropFilter = 'none';
-    }
 });
 
-// ========== ANIMAÇÕES DE ENTRADA ==========
-function initializeAnimations() {
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
+// ===== ANIMAÇÕES DE SCROLL =====
+
+// Observador para animações quando elementos entram na tela
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Aplicar animações aos elementos quando a página carregar
+document.addEventListener('DOMContentLoaded', function() {
+    const animatedElements = document.querySelectorAll('.diferencial-card, .pilar-card, .servico-card, .segmento-card');
     
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, observerOptions);
-    
-    // Observa elementos para animação
-    const animatedElements = document.querySelectorAll('.diferencial-card, .pilar-card, .servico-card');
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
-}
+});
 
-// Inicializa animações quando a página carrega
-document.addEventListener('DOMContentLoaded', initializeAnimations);
-
-// ========== UTILITÁRIOS ==========
-
-// Função para validar email
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
+// ===== UTILITÁRIOS =====
 
 // Função para formatar telefone
-function formatPhone(phone) {
-    const cleaned = phone.replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{2})(\d{4,5})(\d{4})$/);
-    if (match) {
-        return `(${match[1]}) ${match[2]}-${match[3]}`;
+function formatPhone(input) {
+    let value = input.value.replace(/\D/g, '');
+    
+    if (value.length <= 11) {
+        value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        if (value.length < 14) {
+            value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+        }
     }
-    return phone;
+    
+    input.value = value;
 }
 
-// Máscara para telefone
+// Aplicar formatação de telefone
 document.addEventListener('DOMContentLoaded', function() {
     const phoneInput = document.getElementById('telefone');
-    
     if (phoneInput) {
-        phoneInput.addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if (value.length <= 11) {
-                if (value.length <= 2) {
-                    value = value.replace(/(\d{2})/, '($1');
-                } else if (value.length <= 6) {
-                    value = value.replace(/(\d{2})(\d{4})/, '($1) $2');
-                } else if (value.length <= 10) {
-                    value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-                } else {
-                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-                }
-            }
-            
-            e.target.value = value;
+        phoneInput.addEventListener('input', function() {
+            formatPhone(this);
         });
     }
 });
 
-// ========== MENU MOBILE ==========
-function initializeMobileMenu() {
-    // Se precisar de menu hambúrguer no futuro
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (menuToggle && navMenu) {
-        menuToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-        });
-    }
-}
+// ===== EXPOSIÇÃO DE FUNÇÕES GLOBAIS =====
 
-// ========== PERFORMANCE ==========
-
-// Lazy loading para imagens (se necessário no futuro)
-function initializeLazyLoading() {
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
-        
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-    }
-}
-
-// ========== ANALYTICS (para implementação futura) ==========
-function trackEvent(eventName, eventData = {}) {
-    // Implementar Google Analytics ou similar
-    console.log('Event tracked:', eventName, eventData);
-}
-
-// Rastrear cliques importantes
-document.addEventListener('click', function(e) {
-    if (e.target.matches('.cta-button, .cta-primary, .btn-submit')) {
-        trackEvent('CTA_Click', {
-            element: e.target.textContent,
-            page: window.location.pathname
-        });
-    }
-});
-
-// ========== CONSOLE LOG PARA DEBUG ==========
-console.log('🚀 Site do Caio Martins carregado com sucesso!');
-console.log('⏳ Resultados Reais para Pessoas Reais');
-
-// Previne erros em produção
-window.addEventListener('error', function(e) {
-    console.error('Erro capturado:', e.error);
-});
-
-// ========== EXPORTAR FUNÇÕES GLOBAIS ==========
-window.moveCarousel = moveCarousel;
-window.currentSlide = currentSlide;
+// Expor funções para uso nos botões HTML
+window.nextSlide = nextSlide;
+window.prevSlide = prevSlide;
+window.currentSlide = currentSlideFunc;
+window.toggleMobileMenu = toggleMobileMenu;
+window.closeMobileMenu = closeMobileMenu;
 
