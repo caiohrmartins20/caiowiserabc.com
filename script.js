@@ -140,36 +140,8 @@ function handleFormSubmit(e) {
         return;
     }
     
-    // Preparar dados para envio
-    const emailData = {
-        to: 'caio.martins@wiseaai.com.br',
-        subject: `Novo contato do site - ${data.nome}`,
-        body: `
-Nome: ${data.nome}
-E-mail: ${data.email}
-Telefone: ${data.telefone}
-Faixa de Patrimônio: ${data.patrimonio}
-Objetivos: ${data.objetivos || 'Não informado'}
-
-Enviado através do site caiowiserabc.com
-Data: ${new Date().toLocaleString('pt-BR')}
-        `
-    };
-    
-    // Enviar por email (usando mailto como fallback)
-    sendEmail(emailData);
-    
-    // Também redirecionar para WhatsApp
+    // Redirecionar diretamente para WhatsApp
     sendWhatsApp(data);
-}
-
-function sendEmail(emailData) {
-    const subject = encodeURIComponent(emailData.subject);
-    const body = encodeURIComponent(emailData.body);
-    const mailtoLink = `mailto:${emailData.to}?subject=${subject}&body=${body}`;
-    
-    // Tentar abrir cliente de email
-    window.open(mailtoLink, '_blank');
 }
 
 function sendWhatsApp(data) {
