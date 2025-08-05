@@ -41,7 +41,7 @@ body {
     line-height: 1.6;
     color: var(--preto);
     background-color: var(--branco);
-    padding-top: 80px; /* Espaço para header fixo */
+    padding-top: 90px; /* Espaço para header maior */
 }
 
 .container {
@@ -112,14 +112,18 @@ p {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-sm);
-    height: 50px; /* Altura reduzida */
+    height: 70px; /* Altura aumentada */
 }
 
 /* Logo */
 .logo {
-    height: 40px;
+    height: 55px; /* Logo maior */
     width: auto;
     object-fit: contain;
+    background: var(--branco);
+    padding: var(--spacing-xs);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 /* Menu Desktop */
@@ -737,6 +741,10 @@ p {
 .footer-logo img {
     height: 60px;
     margin-bottom: var(--spacing-sm);
+    background: var(--azul-marinho);
+    padding: var(--spacing-sm);
+    border-radius: 8px;
+    filter: brightness(0) invert(1); /* Torna o logo branco */
 }
 
 .footer-logo p {
@@ -802,11 +810,11 @@ p {
     }
     
     .navbar {
-        height: 60px;
+        height: 70px; /* Manter altura consistente */
     }
     
     .logo {
-        height: 35px;
+        height: 50px; /* Logo um pouco menor no mobile */
     }
     
     .cta-button {
