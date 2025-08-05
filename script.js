@@ -76,7 +76,7 @@ function currentSlideFunc(n) {
 function startAutoSlide() {
     autoSlideInterval = setInterval(() => {
         nextSlide();
-    }, 8000); // 8 segundos
+    }, 30000); // 30 segundos
 }
 
 function stopAutoSlide() {

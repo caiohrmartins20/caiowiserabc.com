@@ -59,6 +59,15 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: var(--spacing-sm);
 }
 
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--azul-marinho);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+    font-style: italic;
+}
+
 h1 {
     font-size: 2.5rem;
     margin-bottom: var(--spacing-md);
@@ -696,6 +705,9 @@ p {
     text-decoration: none;
     text-align: left;
     margin: 0;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    font-size: 0.9rem;
 }
 
 .contato-details a:hover {
