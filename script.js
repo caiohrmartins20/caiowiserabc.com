@@ -1,11 +1,14 @@
 // Variáveis globais
 let currentSlide = 0;
-const slides = document.querySelectorAll('.depoimento-card');
-const indicators = document.querySelectorAll('.indicator');
+let slides, indicators;
 let autoSlideInterval;
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar variáveis após DOM carregar
+    slides = document.querySelectorAll('.depoimento-card');
+    indicators = document.querySelectorAll('.indicator');
+    
     initCarousel();
     initForm();
 });
@@ -27,40 +30,55 @@ function initCarousel() {
 }
 
 function showSlide(n) {
+    console.log('showSlide called with:', n, 'currentSlide:', currentSlide); // Debug
+    
+    if (!slides || slides.length === 0) {
+        console.log('No slides found'); // Debug
+        return;
+    }
+    
     // Esconder todos os slides
-    slides.forEach(slide => {
+    slides.forEach((slide, index) => {
         slide.classList.remove('active');
         slide.style.display = 'none';
+        console.log('Hiding slide', index); // Debug
     });
     
     // Remover active de todos os indicadores
-    indicators.forEach(indicator => {
-        indicator.classList.remove('active');
-    });
+    if (indicators) {
+        indicators.forEach(indicator => {
+            indicator.classList.remove('active');
+        });
+    }
     
     // Ajustar índice se necessário
     if (n >= slides.length) currentSlide = 0;
     if (n < 0) currentSlide = slides.length - 1;
     
+    console.log('Showing slide:', currentSlide); // Debug
+    
     // Mostrar slide atual
     if (slides[currentSlide]) {
         slides[currentSlide].classList.add('active');
         slides[currentSlide].style.display = 'flex';
+        console.log('Slide', currentSlide, 'is now active'); // Debug
     }
     
     // Ativar indicador correspondente
-    if (indicators[currentSlide]) {
+    if (indicators && indicators[currentSlide]) {
         indicators[currentSlide].classList.add('active');
     }
 }
 
 function nextSlide() {
+    console.log('nextSlide called, current:', currentSlide); // Debug
     currentSlide++;
     showSlide(currentSlide);
     resetAutoSlide();
 }
 
 function prevSlide() {
+    console.log('prevSlide called, current:', currentSlide); // Debug
     currentSlide--;
     showSlide(currentSlide);
     resetAutoSlide();
