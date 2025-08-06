@@ -8,7 +8,6 @@ let autoSlideInterval;
 document.addEventListener('DOMContentLoaded', function() {
     initCarousel();
     initForm();
-    initMobileMenu();
 });
 
 // ===== CARROSSEL DE DEPOIMENTOS =====
@@ -90,37 +89,12 @@ function resetAutoSlide() {
 
 // ===== MENU MOBILE =====
 
-function initMobileMenu() {
     const menuToggle = document.querySelector('.menu-toggle');
     const mobileMenu = document.querySelector('.mobile-menu');
     
     if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener('click', toggleMobileMenu);
-    }
-}
 
-function toggleMobileMenu() {
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const menuToggle = document.querySelector('.menu-toggle');
-    
-    console.log('Toggle clicked', mobileMenu, menuToggle); // Debug
-    
-    if (mobileMenu && menuToggle) {
-        mobileMenu.classList.toggle('active');
-        menuToggle.classList.toggle('active');
-        console.log('Menu toggled, active:', mobileMenu.classList.contains('active')); // Debug
-    }
-}
 
-function closeMobileMenu() {
-    const mobileMenu = document.querySelector('.mobile-menu');
-    const menuToggle = document.querySelector('.menu-toggle');
-    
-    if (mobileMenu && menuToggle) {
-        mobileMenu.classList.remove('active');
-        menuToggle.classList.remove('active');
-    }
-}
 
 // ===== FORMULÁRIO DE CONTATO =====
 
@@ -208,56 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 // Fechar menu mobile se estiver aberto
-                closeMobileMenu();
-            }
-        });
-    });
-});
-
-// ===== ANIMAÇÕES DE SCROLL =====
-
-// Observador para animações quando elementos entram na tela
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Aplicar animações aos elementos quando a página carregar
-document.addEventListener('DOMContentLoaded', function() {
-    const animatedElements = document.querySelectorAll('.diferencial-card, .pilar-card, .servico-card, .segmento-card');
-    
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-});
-
-// ===== UTILITÁRIOS =====
-
-// Função para formatar telefone
-function formatPhone(input) {
-    let value = input.value.replace(/\D/g, '');
-    
-    if (value.length <= 11) {
-        value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-        if (value.length < 14) {
-            value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-        }
-    }
-    
-    input.value = value;
-}
 
 // Aplicar formatação de telefone
 document.addEventListener('DOMContentLoaded', function() {
@@ -275,6 +199,3 @@ document.addEventListener('DOMContentLoaded', function() {
 window.nextSlide = nextSlide;
 window.prevSlide = prevSlide;
 window.currentSlide = currentSlideFunc;
-window.toggleMobileMenu = toggleMobileMenu;
-window.closeMobileMenu = closeMobileMenu;
-
