@@ -311,33 +311,9 @@ p {
 }
 
 /* Controles do Carrossel */
-.carousel-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--azul-marinho);
-    color: var(--branco);
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: var(--transition);
-    z-index: 10;
-}
 
-.carousel-btn:hover {
-    background: var(--prata);
-}
 
-.carousel-btn.prev {
-    left: -25px;
-}
 
-.carousel-btn.next {
-    right: -25px;
-}
 
 /* Indicadores */
 .carousel-indicators {
@@ -823,91 +799,6 @@ p {
     }
     
     /* Carrossel */
-    .carousel-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
-    
-    .carousel-btn.prev {
-        left: -20px;
-    }
-    
-    .carousel-btn.next {
-        right: -20px;
-    }
-    
-    /* Grids */
-    .diferenciais-grid,
-    .pilares-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .servicos-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .segmentos-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Formulário */
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-    
-    .contato-info {
-        grid-template-columns: 1fr;
-    }
-    
-    /* Footer */
-    .footer-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-    
-    .footer-links {
-        grid-template-columns: 1fr;
-    }
-    
-    .footer-section h4,
-    .footer-logo p {
-        text-align: center;
-    }
-    
-    /* Espaçamentos */
-    .container {
-        padding: 0 var(--spacing-sm);
-    }
-    
-    h1 {
-        font-size: 2rem;
-    }
-    
-    h2 {
-        font-size: 1.5rem;
-    }
-    
-    /* Contato Mobile - Formulário acima dos contatos */
-    .contato .container {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .contato h2,
-    .contato-subtitle {
-        order: 1;
-    }
-    
-    .formulario-container {
-        order: 2;
-        margin-bottom: var(--spacing-lg);
-    }
-    
-    .contato-info {
-        order: 3;
-    }
-}
 
 @media (max-width: 480px) {
     .segmentos-grid {
@@ -918,23 +809,4 @@ p {
         font-size: 1.8rem;
     }
     
-    .carousel-btn {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
-    }
-    
-    .carousel-btn.prev {
-        left: 10px;
-    }
-    
-    .carousel-btn.next {
-        right: 10px;
-    }
-    
-    .depoimento-card {
-        min-height: 200px;
-        padding: var(--spacing-md);
-    }
-}
 

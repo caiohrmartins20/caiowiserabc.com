@@ -54,18 +54,6 @@ function showSlide(n) {
     }
 }
 
-function nextSlide() {
-    currentSlide++;
-    showSlide(currentSlide);
-    resetAutoSlide();
-}
-
-function prevSlide() {
-    currentSlide--;
-    showSlide(currentSlide);
-    resetAutoSlide();
-}
-
 function currentSlideFunc(n) {
     currentSlide = n - 1;
     showSlide(currentSlide);
@@ -74,7 +62,8 @@ function currentSlideFunc(n) {
 
 function startAutoSlide() {
     autoSlideInterval = setInterval(() => {
-        nextSlide();
+        currentSlide++;
+        showSlide(currentSlide);
     }, 30000); // 30 segundos
 }
 
@@ -196,6 +185,4 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===== EXPOSIÇÃO DE FUNÇÕES GLOBAIS =====
 
 // Expor funções para uso nos botões HTML
-window.nextSlide = nextSlide;
-window.prevSlide = prevSlide;
 window.currentSlide = currentSlideFunc;
