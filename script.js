@@ -64,7 +64,7 @@ function startAutoSlide() {
     autoSlideInterval = setInterval(() => {
         currentSlide++;
         showSlide(currentSlide);
-    }, 30000); // 30 segundos
+    }, 15000); // 15 segundos
 }
 
 function stopAutoSlide() {
@@ -74,19 +74,6 @@ function stopAutoSlide() {
 function resetAutoSlide() {
     stopAutoSlide();
     startAutoSlide();
-}
-
-// Funções das setas
-function nextSlide() {
-    currentSlide++;
-    showSlide(currentSlide);
-    resetAutoSlide();
-}
-
-function prevSlide() {
-    currentSlide--;
-    showSlide(currentSlide);
-    resetAutoSlide();
 }
 
 // ===== MENU MOBILE =====
@@ -199,5 +186,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Expor funções para uso nos botões HTML
 window.currentSlide = currentSlideFunc;
-window.nextSlide = nextSlide;
-window.prevSlide = prevSlide;
