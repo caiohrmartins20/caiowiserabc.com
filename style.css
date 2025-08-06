@@ -123,6 +123,7 @@ p {
 
 .nav-left {
     justify-content: flex-start;
+    position: relative;
 }
 
 .nav-center {
@@ -187,6 +188,7 @@ p {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     list-style: none;
     padding: var(--spacing-sm) 0;
+    z-index: 999;
 }
 
 .mobile-menu li {
@@ -948,7 +950,19 @@ p {
     }
     
     .carousel-btn {
-        display: none;
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        left: 10px;
+        right: 10px;
+    }
+    
+    .carousel-btn.prev {
+        left: 10px;
+    }
+    
+    .carousel-btn.next {
+        right: 10px;
     }
     
     .depoimento-card {

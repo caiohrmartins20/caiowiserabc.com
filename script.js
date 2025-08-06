@@ -103,9 +103,12 @@ function toggleMobileMenu() {
     const mobileMenu = document.querySelector('.mobile-menu');
     const menuToggle = document.querySelector('.menu-toggle');
     
+    console.log('Toggle clicked', mobileMenu, menuToggle); // Debug
+    
     if (mobileMenu && menuToggle) {
         mobileMenu.classList.toggle('active');
         menuToggle.classList.toggle('active');
+        console.log('Menu toggled, active:', mobileMenu.classList.contains('active')); // Debug
     }
 }
 
