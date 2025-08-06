@@ -76,6 +76,19 @@ function resetAutoSlide() {
     startAutoSlide();
 }
 
+// Funções das setas
+function nextSlide() {
+    currentSlide++;
+    showSlide(currentSlide);
+    resetAutoSlide();
+}
+
+function prevSlide() {
+    currentSlide--;
+    showSlide(currentSlide);
+    resetAutoSlide();
+}
+
 // ===== MENU MOBILE =====
 
     const menuToggle = document.querySelector('.menu-toggle');
@@ -186,3 +199,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Expor funções para uso nos botões HTML
 window.currentSlide = currentSlideFunc;
+window.nextSlide = nextSlide;
+window.prevSlide = prevSlide;
