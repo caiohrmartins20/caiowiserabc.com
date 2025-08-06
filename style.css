@@ -41,7 +41,7 @@ body {
     line-height: 1.6;
     color: var(--preto);
     background-color: var(--branco);
-    padding-top: 90px; /* Espaço para header maior */
+    padding-top: 100px; /* Espaço para header maior */
 }
 
 .container {
@@ -112,12 +112,30 @@ p {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-sm);
-    height: 70px; /* Altura aumentada */
+    height: 80px; /* Altura aumentada para logo maior */
+}
+
+.nav-left, .nav-center, .nav-right {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.nav-left {
+    justify-content: flex-start;
+}
+
+.nav-center {
+    justify-content: center;
+}
+
+.nav-right {
+    justify-content: flex-end;
 }
 
 /* Logo */
 .logo {
-    height: 55px; /* Logo maior */
+    height: 70px; /* Logo maior */
     width: auto;
     object-fit: contain;
 }
@@ -802,11 +820,11 @@ p {
     }
     
     .navbar {
-        height: 70px; /* Manter altura consistente */
+        height: 80px; /* Manter altura consistente */
     }
     
     .logo {
-        height: 50px; /* Logo um pouco menor no mobile */
+        height: 65px; /* Logo maior no mobile */
     }
     
     .cta-button {
