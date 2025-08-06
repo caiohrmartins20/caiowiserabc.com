@@ -277,9 +277,9 @@ p {
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     text-align: center;
     min-height: 250px;
-    display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .depoimento-card.active {
