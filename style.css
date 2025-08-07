@@ -798,7 +798,44 @@ p {
         text-align: center;
     }
     
-    /* Carrossel */
+    /* Formulário Mobile */
+    .form-row {
+        grid-template-columns: 1fr; /* Uma coluna no mobile */
+        gap: 0;
+    }
+    
+    .formulario {
+        padding: var(--spacing-md);
+    }
+    
+    /* Footer Mobile */
+    .footer-content {
+        grid-template-columns: 1fr; /* Uma coluna no mobile */
+        text-align: center;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr; /* Uma coluna no mobile */
+        gap: var(--spacing-md);
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    
+    .footer-section h4,
+    .footer-logo p {
+        text-align: center;
+    }
+    
+    /* Quebra de texto longo */
+    .footer-section a,
+    .footer-section p,
+    .footer-bottom p {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+}
 
 @media (max-width: 480px) {
     .segmentos-grid {
@@ -808,6 +845,23 @@ p {
     .hero-content h1 {
         font-size: 1.8rem;
     }
+    
+    /* Formulário ainda menor */
+    .formulario {
+        padding: var(--spacing-sm);
+        margin: 0 var(--spacing-xs);
+    }
+    
+    /* Footer ainda mais compacto */
+    .footer {
+        padding: var(--spacing-lg) var(--spacing-xs) var(--spacing-md);
+    }
+    
+    .footer-section a,
+    .footer-section p {
+        font-size: 0.9rem;
+    }
+}
     
 
 
