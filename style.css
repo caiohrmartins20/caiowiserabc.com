@@ -646,9 +646,16 @@ p {
     text-align: center; /* Centraliza todo o conteúdo da caixa */
 }
 
+/* NOVO CSS para a imagem do logo */
+.contato-logo {
+    width: 48px; /* Ajusta o tamanho da imagem */
+    height: auto;
+    margin-bottom: var(--spacing-xs);
+}
+
+/* REMOVEMOS O CSS ANTIGO .contato-icon */
 .contato-icon {
-    font-size: 2rem;
-    margin-bottom: 0; /* Remove a margem para ficar mais próximo do texto */
+    display: none;
 }
 
 .contato-details h4 {
@@ -663,7 +670,8 @@ p {
     text-decoration: none;
     text-align: center;
     margin: 0;
-    /* Remover word-break e overflow-wrap para evitar quebra de linha indesejada */
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .contato-details a:hover {
