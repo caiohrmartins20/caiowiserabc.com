@@ -682,24 +682,23 @@ p {
     background: var(--azul-marinho);
     color: var(--branco);
     padding: var(--spacing-xl) 0 var(--spacing-md);
+    text-align: center;
 }
 
 .footer-content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+    justify-content: center; /* Centraliza os itens */
+    align-items: flex-start;
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
-    text-align: center; /* Centraliza o texto do rodapé */
 }
 
-@media (min-width: 769px) {
-    .footer-content {
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: flex-start;
-        flex-wrap: wrap;
-    }
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .footer-logo img {
@@ -714,21 +713,14 @@ p {
 
 .footer-links {
     display: flex;
-    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
-    justify-content: center; /* Centraliza os itens em telas menores */
-    gap: var(--spacing-lg);
-    margin-top: var(--spacing-md);
+    flex-wrap: wrap; /* Permite que os links quebrem para a próxima linha */
+    justify-content: center; /* Centraliza os links dentro do contêiner */
+    gap: var(--spacing-md);
 }
 
 .footer-section {
-    width: 100%; /* Garante que a seção ocupe a largura total no mobile */
-}
-
-@media (min-width: 769px) {
-    .footer-section {
-        width: auto;
-        flex: 1; /* Permite que as seções se ajustem dinamicamente */
-    }
+    width: auto; /* Deixa o contêiner se ajustar ao conteúdo */
+    text-align: center;
 }
 
 .footer-section h4 {
@@ -762,7 +754,7 @@ p {
     border: 1px solid transparent;
     border-radius: 8px;
     text-align: center;
-    min-width: 150px; /* Garante que os links tenham uma largura mínima */
+    white-space: nowrap; /* Impede que o texto quebre a linha */
 }
 
 .footer-section a i {
