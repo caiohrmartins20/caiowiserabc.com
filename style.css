@@ -626,7 +626,7 @@ p {
     min-height: 100px;
 }
 
-/* Informações de Contato - SEÇÃO CORRIGIDA */
+/* Informações de Contato */
 .contato-info {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -670,8 +670,11 @@ p {
     text-decoration: none;
     text-align: center;
     margin: 0;
-    word-break: break-word;
-    overflow-wrap: break-word;
+}
+
+/* Alteração: Regra definitiva para o e-mail não quebrar a linha */
+.contato-details a[href^="mailto"] {
+    white-space: nowrap;
 }
 
 .contato-details a:hover {
@@ -874,6 +877,29 @@ p {
     .footer-bottom p {
         word-break: break-word;
         overflow-wrap: break-word;
+    }
+
+    /* Alteração para o Contato */
+    .contato-info {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+        text-align: left;
+    }
+
+    .contato-item {
+        flex-direction: row; /* Volta a alinhar na horizontal no mobile */
+        align-items: center;
+        text-align: left;
+        padding: var(--spacing-md) var(--spacing-sm);
+        gap: var(--spacing-sm);
+    }
+
+    .contato-logo {
+        margin-bottom: 0;
+    }
+
+    .contato-details {
+        text-align: left;
     }
 }
 
