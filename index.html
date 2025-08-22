@@ -13,21 +13,8 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
-        .contato-details a {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-        /* Ajuste para telas pequenas (smartphones) */
-        @media (max-width: 600px) {
-            .contato-info {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .contato-item {
-                width: 100%;
-                margin-bottom: 20px;
-            }
+        .contato-details a[href^="mailto"] {
+            white-space: nowrap; /* Impede a quebra de linha do texto do e-mail */
         }
     </style>
 
