@@ -888,7 +888,7 @@ p {
 
     .contato-item {
         flex-direction: row; /* Volta a alinhar na horizontal no mobile */
-        align-items: flex-start; /* CORREÇÃO AQUI: Alinha o conteúdo ao topo */
+        align-items: flex-start; /* Alinha o conteúdo ao topo */
         text-align: left;
         padding: var(--spacing-md) var(--spacing-sm);
         gap: var(--spacing-sm);
@@ -898,9 +898,15 @@ p {
         margin-bottom: 0;
     }
 
+    /* CORREÇÃO APLICADA AQUI */
     .contato-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
         text-align: left;
+        gap: 0.25rem; /* Ajusta o espaçamento entre o título e o texto */
     }
+    
 }
 
 @media (max-width: 480px) {
