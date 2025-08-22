@@ -888,7 +888,7 @@ p {
 
     .contato-item {
         flex-direction: row; /* Volta a alinhar na horizontal no mobile */
-        align-items: center;
+        align-items: flex-start; /* CORREÇÃO AQUI: Alinha o conteúdo ao topo */
         text-align: left;
         padding: var(--spacing-md) var(--spacing-sm);
         gap: var(--spacing-sm);
