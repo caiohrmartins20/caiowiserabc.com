@@ -28,7 +28,7 @@
     --spacing-xl: 4rem;
     
     /* Transições */
-    --transition: all 0.3s ease;
+    --transition: all 0.5s ease-in-out;
 }
 
 /* Base */
@@ -252,38 +252,85 @@ p {
     box-shadow: 0 10px 30px rgba(27, 54, 93, 0.2);
 }
 
-/* Depoimentos */
+/* Depoimentos - Cover Flow 3D */
 .depoimentos {
     padding: var(--spacing-xl) 0;
     background: var(--cinza-claro);
+    overflow-x: hidden; /* Previne barras de rolagem horizontais */
 }
 
 .carousel-container {
     position: relative;
-    max-width: 800px;
+    width: 100%;
+    max-width: 900px; /* Aumenta um pouco para dar espaço aos botões */
     margin: 0 auto;
+    height: 400px; 
+    perspective: 1200px; /* Define a perspectiva 3D */
 }
 
 .carousel {
-    overflow: hidden;
-    border-radius: 15px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d; /* Habilita o espaço 3D para os filhos */
 }
 
 .depoimento-card {
-    display: none;
+    position: absolute;
+    width: 55%;
+    max-width: 450px;
+    height: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
     background: var(--branco);
-    padding: var(--spacing-lg);
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    text-align: center;
-    min-height: 250px;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    padding: var(--spacing-lg);
+    display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    -webkit-backface-visibility: hidden; /* Melhora performance da animação */
+    backface-visibility: hidden;
 }
 
+/* Card Ativo (Central) */
 .depoimento-card.active {
-    display: flex;
+    transform: translateZ(0);
+    opacity: 1;
+    z-index: 10;
+    cursor: default;
+}
+
+/* Card Anterior (Esquerda) */
+.depoimento-card.prev {
+    transform: translateX(-55%) rotateY(-30deg);
+    opacity: 0.6;
+    z-index: 5;
+}
+
+/* Card Próximo (Direita) */
+.depoimento-card.next {
+    transform: translateX(55%) rotateY(30deg);
+    opacity: 0.6;
+    z-index: 5;
+}
+
+/* Cards distantes para uma transição suave */
+.depoimento-card.far-prev {
+    transform: translateX(-110%) rotateY(-35deg) scale(0.9);
+    opacity: 0;
+    z-index: 1;
+}
+
+.depoimento-card.far-next {
+    transform: translateX(110%) rotateY(35deg) scale(0.9);
+    opacity: 0;
+    z-index: 1;
 }
 
 .depoimento-content p {
@@ -292,10 +339,6 @@ p {
     margin-bottom: var(--spacing-md);
     font-style: italic;
     color: var(--cinza-corporativo);
-}
-
-.depoimento-autor {
-    text-align: center;
 }
 
 .depoimento-autor strong {
@@ -311,26 +354,33 @@ p {
 }
 
 /* Controles do Carrossel */
-
-/* Indicadores */
-.carousel-indicators {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-xs);
-    margin-top: var(--spacing-md);
-}
-
-.indicator {
-    width: 12px;
-    height: 12px;
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(27, 54, 93, 0.5);
+    color: var(--branco);
+    border: none;
     border-radius: 50%;
-    background: var(--prata);
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: var(--transition);
+    z-index: 20;
+    transition: background-color 0.3s ease;
 }
 
-.indicator.active {
-    background: var(--azul-marinho);
+.carousel-control:hover {
+    background-color: var(--azul-marinho);
+}
+
+.carousel-control.prev {
+    left: 0px;
+}
+
+.carousel-control.next {
+    right: 0px;
 }
 
 /* Diferenciais */
@@ -636,24 +686,22 @@ p {
 
 .contato-item {
     display: flex;
-    flex-direction: column; /* Alinha ícone e texto na vertical */
-    align-items: center; /* Centraliza horizontalmente */
+    flex-direction: column;
+    align-items: center;
     gap: var(--spacing-md);
     background: var(--branco);
     padding: var(--spacing-md);
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    text-align: center; /* Centraliza todo o conteúdo da caixa */
+    text-align: center;
 }
 
-/* NOVO CSS para a imagem do logo */
 .contato-logo {
-    width: 48px; /* Ajusta o tamanho da imagem */
+    width: 48px;
     height: auto;
     margin-bottom: var(--spacing-xs);
 }
 
-/* REMOVEMOS O CSS ANTIGO .contato-icon */
 .contato-icon {
     display: none;
 }
@@ -672,7 +720,6 @@ p {
     margin: 0;
 }
 
-/* Alteração: Regra definitiva para o e-mail não quebrar a linha */
 .contato-details a[href^="mailto"] {
     white-space: nowrap;
 }
@@ -697,8 +744,8 @@ p {
 
 .footer-content {
     display: flex;
-    flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
-    justify-content: center; /* Centraliza os itens */
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: flex-start;
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
@@ -723,13 +770,13 @@ p {
 
 .footer-links {
     display: flex;
-    flex-wrap: wrap; /* Permite que os links quebrem para a próxima linha */
-    justify-content: center; /* Centraliza os links dentro do contêiner */
+    flex-wrap: wrap;
+    justify-content: center;
     gap: var(--spacing-md);
 }
 
 .footer-section {
-    width: auto; /* Deixa o contêiner se ajustar ao conteúdo */
+    width: auto;
     text-align: center;
 }
 
@@ -764,7 +811,7 @@ p {
     border: 1px solid transparent;
     border-radius: 8px;
     text-align: center;
-    white-space: nowrap; /* Impede que o texto quebre a linha */
+    white-space: nowrap;
 }
 
 .footer-section a i {
@@ -810,11 +857,11 @@ p {
     }
     
     .navbar {
-        height: 80px; /* Manter altura consistente */
+        height: 80px;
     }
     
     .logo {
-        height: 65px; /* Logo maior no mobile */
+        height: 65px;
     }
     
     .cta-button {
@@ -830,6 +877,38 @@ p {
     .hero-subtitle {
         font-size: 1rem;
     }
+
+    /* Carrossel Mobile */
+    .carousel-container {
+        height: 450px; /* Aumenta a altura no mobile para melhor leitura */
+    }
+
+    .depoimento-card {
+        width: 80%; /* Ocupa mais espaço na tela */
+        padding: var(--spacing-md);
+    }
+
+    .depoimento-card.prev {
+        transform: translateX(-40%) rotateY(-20deg) scale(0.8);
+    }
+
+    .depoimento-card.next {
+        transform: translateX(40%) rotateY(20deg) scale(0.8);
+    }
+
+    .carousel-control {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
+    .carousel-control.prev {
+        left: -10px;
+    }
+
+    .carousel-control.next {
+        right: -10px;
+    }
     
     /* História */
     .historia-content {
@@ -843,7 +922,7 @@ p {
     
     /* Formulário Mobile */
     .form-row {
-        grid-template-columns: 1fr; /* Uma coluna no mobile */
+        grid-template-columns: 1fr;
         gap: 0;
     }
     
@@ -853,12 +932,14 @@ p {
     
     /* Footer Mobile */
     .footer-content {
-        grid-template-columns: 1fr; /* Uma coluna no mobile */
-        text-align: center;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-md);
     }
     
     .footer-links {
-        grid-template-columns: 1fr; /* Uma coluna no mobile */
+        flex-direction: column;
+        align-items: center;
         gap: var(--spacing-md);
     }
     
@@ -871,7 +952,6 @@ p {
         text-align: center;
     }
     
-    /* Quebra de texto longo */
     .footer-section a,
     .footer-section p,
     .footer-bottom p {
@@ -879,33 +959,30 @@ p {
         overflow-wrap: break-word;
     }
 
-    /* ====== AJUSTE PEDIDO: centralização das 4 caixas no mobile ====== */
     .contato-info {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
-        text-align: center; /* garante centralização dentro da grid */
     }
 
     .contato-item {
-        flex-direction: column;      /* ícone acima, textos abaixo */
-        align-items: center;         /* centraliza horizontal */
-        text-align: center;          /* centraliza títulos/links/textos */
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
         padding: var(--spacing-md) var(--spacing-sm);
         gap: var(--spacing-sm);
     }
 
     .contato-logo {
-        margin-bottom: var(--spacing-xs); /* dá respiro entre ícone e textos */
+        margin-bottom: var(--spacing-xs);
     }
 
     .contato-details {
-        text-align: center; /* títulos e links centralizados */
+        text-align: center;
     }
 
     .instagram-links {
-        align-items: center; /* centraliza os dois @s */
+        align-items: center;
     }
-    /* ====== FIM DO AJUSTE ====== */
 }
 
 @media (max-width: 480px) {
@@ -917,13 +994,11 @@ p {
         font-size: 1.8rem;
     }
     
-    /* Formulário ainda menor */
     .formulario {
         padding: var(--spacing-sm);
         margin: 0 var(--spacing-xs);
     }
     
-    /* Footer ainda mais compacto */
     .footer {
         padding: var(--spacing-lg) var(--spacing-xs) var(--spacing-md);
     }
