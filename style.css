@@ -356,29 +356,29 @@ p {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: transparent; /* << ALTERAÇÃO: Fundo transparente */
-    color: var(--azul-marinho);   /* << ALTERAÇÃO: Cor da seta */
+    background-color: transparent;
+    color: var(--azul-marinho);
     border: none;
     width: 50px;
     height: 50px;
-    font-size: 3rem; /* Aumenta o tamanho da seta para melhor visibilidade */
+    font-size: 3rem;
     font-weight: bold;
     cursor: pointer;
     z-index: 20;
-    transition: color 0.3s ease; /* Transição na cor da seta */
-    text-shadow: 0 1px 3px rgba(255,255,255,0.4); /* Sombra para destacar a seta */
+    transition: color 0.3s ease;
+    text-shadow: 0 1px 3px rgba(255,255,255,0.4);
 }
 
 .carousel-control:hover {
-    color: var(--prata); /* << ALTERAÇÃO: Muda a cor no hover */
+    color: var(--prata);
 }
 
 .carousel-control.prev {
-    left: 0px;
+    left: -50px; /* << ALTERAÇÃO: Afasta a seta para a esquerda */
 }
 
 .carousel-control.next {
-    right: 0px;
+    right: -50px; /* << ALTERAÇÃO: Afasta a seta para a direita */
 }
 
 /* Diferenciais */
@@ -897,7 +897,7 @@ p {
     .carousel-control {
         width: 40px;
         height: 40px;
-        font-size: 2.5rem; /* Aumenta a seta no mobile também */
+        font-size: 2.5rem;
     }
 
     .carousel-control.prev {
