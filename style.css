@@ -664,12 +664,15 @@ p {
     text-align: center;
 }
 
+/* --- CORREÇÃO APLICADA AQUI --- */
 .contato-details p,
 .contato-details a {
     color: var(--cinza-corporativo);
     text-decoration: none;
-    text-align: center;
     margin: 0;
+    text-align: center;
+    width: 100%;
+    display: block;
 }
 
 /* Alteração: Regra definitiva para o e-mail não quebrar a linha */
