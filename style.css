@@ -646,12 +646,14 @@ p {
     text-align: center; /* Centraliza todo o conteúdo da caixa */
 }
 
+/* NOVO CSS para a imagem do logo */
 .contato-logo {
     width: 48px; /* Ajusta o tamanho da imagem */
     height: auto;
     margin-bottom: var(--spacing-xs);
 }
 
+/* REMOVEMOS O CSS ANTIGO .contato-icon */
 .contato-icon {
     display: none;
 }
