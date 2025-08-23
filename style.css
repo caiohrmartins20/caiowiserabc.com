@@ -646,12 +646,14 @@ p {
     text-align: center; /* Centraliza todo o conteúdo da caixa */
 }
 
+/* NOVO CSS para a imagem do logo */
 .contato-logo {
     width: 48px; /* Ajusta o tamanho da imagem */
     height: auto;
     margin-bottom: var(--spacing-xs);
 }
 
+/* REMOVEMOS O CSS ANTIGO .contato-icon */
 .contato-icon {
     display: none;
 }
@@ -879,7 +881,6 @@ p {
 
     /* Contato */
     .contato-info {
-        display: grid;
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
         text-align: left;
@@ -887,8 +888,8 @@ p {
 
     .contato-item {
         display: flex;
-        flex-direction: row;
-        align-items: center;
+        flex-direction: row; /* Alinha ícone e texto na horizontal */
+        align-items: center; /* Centraliza verticalmente a caixa de texto com o ícone */
         padding: var(--spacing-md) var(--spacing-sm);
         gap: var(--spacing-sm);
     }
@@ -896,28 +897,14 @@ p {
     .contato-logo {
         margin-bottom: 0;
     }
-    
+
+    /* CORREÇÃO AQUI: Garante que os textos dentro da caixa de detalhes estejam alinhados */
     .contato-details {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start; /* Alinha os textos à esquerda */
+        text-align: left;
         gap: 0.25rem;
-    }
-
-    /* Regra definitiva de alinhamento para os textos */
-    .contato-details h4,
-    .contato-details p,
-    .contato-details a,
-    .instagram-links {
-        text-align: center !important;
-        width: 100%;
-    }
-
-    .instagram-links {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: var(--spacing-xs);
     }
     
 }
