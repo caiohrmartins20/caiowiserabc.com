@@ -904,14 +904,15 @@ p {
         flex-direction: column;
         align-items: center; /* Centraliza os textos dentro da caixa */
         gap: 0.25rem;
+        text-align: center;
     }
 
     .contato-details h4,
     .contato-details p,
     .contato-details a,
     .instagram-links {
-        text-align: center;
-        width: 100%; /* Garante que os elementos preencham a largura para o alinhamento */
+        text-align: center !important; /* FORÇA o alinhamento para o centro */
+        width: 100%;
     }
 
     .instagram-links {
