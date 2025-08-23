@@ -879,28 +879,33 @@ p {
         overflow-wrap: break-word;
     }
 
-    /* Alteração para o Contato */
+    /* ====== AJUSTE PEDIDO: centralização das 4 caixas no mobile ====== */
     .contato-info {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
-        text-align: left;
+        text-align: center; /* garante centralização dentro da grid */
     }
 
     .contato-item {
-        flex-direction: row; /* Volta a alinhar na horizontal no mobile */
-        align-items: center;
-        text-align: left;
+        flex-direction: column;      /* ícone acima, textos abaixo */
+        align-items: center;         /* centraliza horizontal */
+        text-align: center;          /* centraliza títulos/links/textos */
         padding: var(--spacing-md) var(--spacing-sm);
         gap: var(--spacing-sm);
     }
 
     .contato-logo {
-        margin-bottom: 0;
+        margin-bottom: var(--spacing-xs); /* dá respiro entre ícone e textos */
     }
 
     .contato-details {
-        text-align: left;
+        text-align: center; /* títulos e links centralizados */
     }
+
+    .instagram-links {
+        align-items: center; /* centraliza os dois @s */
+    }
+    /* ====== FIM DO AJUSTE ====== */
 }
 
 @media (max-width: 480px) {
