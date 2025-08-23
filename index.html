@@ -13,8 +13,9 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
+        /* Pequeno ajuste para garantir que o e-mail não quebre em telas pequenas */
         .contato-details a[href^="mailto"] {
-            white-space: nowrap; /* Impede a quebra de linha do texto do e-mail */
+            word-break: break-all;
         }
     </style>
 
@@ -45,453 +46,314 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>⏳ Resultados Reais para Pessoas Reais</h1>
-                <p class="hero-subtitle">Assessoria de investimentos que fala sua língua, com a estrutura da <strong>Wiser | BTG Pactual</strong> e o compromisso de quem sabe o valor de cada conquista.</p>
-                <a href="#contato" class="cta-button-large">Seu Presente Recomeça Aqui</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="historia" class="historia">
-        <div class="container">
-            <h2>De Itaquera para o Mundo dos Investimentos</h2>
-            <p class="section-subtitle">Porque quem ama, investe no futuro</p>
-            <div class="historia-content">
-                <div class="historia-text">
-                    <p>Nasci e cresci em Itaquera, na Cidade Líder, zona leste de São Paulo, em uma família simples, mas rica em valores. Meu avô viveu das vendas, sempre com esforço, carisma e resiliência. Meu pai tentou diversos negócios ao longo da vida (falhou, recomeçou, insistiu ) e me mostrou, na prática, que não existe fracasso para quem persiste, se tornando um dos principais empresários do ramo imobiliário de Santo André.</p>
-                    
-                    <p>Com eles aprendi que trabalhar duro é honrar quem veio antes e abrir caminho para quem vem depois. Transformar a vida da nossa família é mais do que uma conquista: é um propósito.</p>
-                </div>
-                <div class="historia-image">
-                    <img src="FotoCaio.jpeg" alt="Caio Martins - Assessor de Investimentos" class="foto-caio">
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>⏳ Resultados Reais para Pessoas Reais</h1>
+                    <p class="hero-subtitle">Assessoria de investimentos que fala sua língua, com a estrutura da <strong>Wiser | BTG Pactual</strong> e o compromisso de quem sabe o valor de cada conquista.</p>
+                    <a href="#contato" class="cta-button-large">Seu Presente Recomeça Aqui</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="depoimentos" class="depoimentos">
-        <div class="container">
-            <h2>O que meus clientes dizem</h2>
-            <div class="carousel-container">
-                <div class="carousel" id="carousel">
-                    <div class="depoimento-card active">
-                        <div class="depoimento-content">
-                            <p>"Estou muito satisfeito com a consultoria que recebo do Caio. Ele leva bem em conta o meu perfil, avaliando a situação financeira, meus objetivos, o horizonte de tempo. Em nossas conversas posso dizer que é bem transparente sobre os riscos e custos envolvidos nas estratégias de investimento que apresenta."</p>
-                            <div class="depoimento-autor">
-                                <strong>Theus</strong>
-                                <span>Empresário</span>
-                            </div>
-                        </div>
+        <section id="historia" class="historia">
+            <div class="container">
+                <h2>De Itaquera para o Mundo dos Investimentos</h2>
+                <p class="section-subtitle">Porque quem ama, investe no futuro</p>
+                <div class="historia-content">
+                    <div class="historia-text">
+                        <p>Nasci e cresci em Itaquera, na Cidade Líder, zona leste de São Paulo, em uma família simples, mas rica em valores. Meu avô viveu das vendas, sempre com esforço, carisma e resiliência. Meu pai tentou diversos negócios ao longo da vida (falhou, recomeçou, insistiu ) e me mostrou, na prática, que não existe fracasso para quem persiste, se tornando um dos principais empresários do ramo imobiliário de Santo André.</p>
+                        
+                        <p>Com eles aprendi que trabalhar duro é honrar quem veio antes e abrir caminho para quem vem depois. Transformar a vida da nossa família é mais do que uma conquista: é um propósito.</p>
                     </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Compreendeu meu perfil de investimento e está sempre atento e oferecendo os melhores produtos que atendam minhas exigências."</p>
-                            <div class="depoimento-autor">
-                                <strong>Noely</strong>
-                                <span>Arquiteta</span>
-                            </div>
-                        </div>
+                    <div class="historia-image">
+                        <img src="FotoCaio.jpeg" alt="Caio Martins - Assessor de Investimentos" class="foto-caio">
                     </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Caio, parabéns pelo trabalho e resultados obtidos. Estou muito satisfeito pela assessoria e atendimento diário."</p>
-                            <div class="depoimento-autor">
-                                <strong>Gilberto</strong>
-                                <span>Empresário - São Paulo</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Conheci o Caio através de meu filho que já fazia consultoria com o Caio na Wiser | BTG Pactual. No princípio fiquei um pouco receosa, porém depois da primeira conversa com Caio que, apesar de ser muito jovem demonstra muito conhecimento na área, me deixou bastante tranquila. Estou muito satisfeita principalmente com a atenção e o cuidado."</p>
-                            <div class="depoimento-autor">
-                                <strong>Renata</strong>
-                                <span>Empresária e aposentada - São Manuel</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Como cliente do Caio e da Wiser, super indico essa modalidade de ter alguém atuando comigo e para mim no acompanhamento de meus investimentos. O poder de decisão fica mais próximo das atualizações do mercado."</p>
-                            <div class="depoimento-autor">
-                                <strong>Márcio</strong>
-                                <span>Empresário - São Paulo</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Desde o início do nosso contato, Caio tem se mostrado um profissional atencioso, proativo e sempre disposto a esclarecer dúvidas com clareza e cordialidade. Nosso relacionamento ainda está em fase inicial, mas tenho tido uma boa impressão de sua postura e dedicação."</p>
-                            <div class="depoimento-autor">
-                                <strong>Cliente</strong>
-                                <span>Rio de Janeiro</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Sua dedicação, profissionalismo e disponibilidade me transmitem muita confiança nas decisões financeiras. Muito obrigada!"</p>
-                            <div class="depoimento-autor">
-                                <strong>Analuiza</strong>
-                                <span>Cliente</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Atendimento de excelência, com clareza, agilidade e total comprometimento. Um suporte indispensável nas minhas decisões financeiras."</p>
-                            <div class="depoimento-autor">
-                                <strong>Raphael</strong>
-                                <span>Casal de empresários - São Paulo</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Katia e eu, junto com nossas duas filhas, temos contas de investimento com o Caio há vários anos na Wiser | BTG Pactual. Podemos recomendar o Caio e seus colegas de forma plena pela assessoria financeira profissional e pelo suporte que sempre nos ofereceram."</p>
-                            <div class="depoimento-autor">
-                                <strong>Austin e Kátia</strong>
-                                <span>Administrador de bens - São Paulo</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Venho expressar minha satisfação em ter o Caio Martins como assessor. O Caio é um profissional muito atencioso e prestativo, com um atendimento excelente, oferece soluções personalizadas e nos auxilia de maneira clara e eficiente."</p>
-                            <div class="depoimento-autor">
-                                <strong>Fabiana Guimarães</strong>
-                                <span>Empresária - São Paulo</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Trabalho com o Caio já faz alguns anos e gosto muito do jeito que ele conduz tudo. O trabalho dele é sempre bem pensado e feito de acordo com o meu perfil de investidor. É alguém em quem confio de verdade."</p>
-                            <div class="depoimento-autor">
-                                <strong>Matheus Guimarães</strong>
-                                <span>Empresário - São Paulo</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Gostaria de deixar registrada minha satisfação com o atendimento prestado pelo Caio. Demonstrou profissionalismo, conhecimento técnico e, acima de tudo, comprometimento com meus objetivos financeiros. Me sinto mais segura e preparada para tomar decisões financeiras."</p>
-                            <div class="depoimento-autor">
-                                <strong>Jéssica Marré</strong>
-                                <span>Empresária</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="depoimento-card">
-                        <div class="depoimento-content">
-                            <p>"Antes de iniciar o acompanhamento com Caio Martins, minhas finanças pareciam um quebra-cabeça complexo. Desde o primeiro contato, senti uma confiança imediata. Hoje, sinto uma segurança incomparável em relação ao meu dinheiro e ao meu futuro. Recomendo fortemente o trabalho do Caio."</p>
-                            <div class="depoimento-autor">
-                                <strong>Emerson Brandão</strong>
-                                <span>Empresário - São Caetano do Sul</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-indicators">
-                    <span class="indicator active" onclick="currentSlide(1)"></span>
-                    <span class="indicator" onclick="currentSlide(2)"></span>
-                    <span class="indicator" onclick="currentSlide(3)"></span>
-                    <span class="indicator" onclick="currentSlide(4)"></span>
-                    <span class="indicator" onclick="currentSlide(5)"></span>
-                    <span class="indicator" onclick="currentSlide(6)"></span>
-                    <span class="indicator" onclick="currentSlide(7)"></span>
-                    <span class="indicator" onclick="currentSlide(8)"></span>
-                    <span class="indicator" onclick="currentSlide(9)"></span>
-                    <span class="indicator" onclick="currentSlide(10)"></span>
-                    <span class="indicator" onclick="currentSlide(11)"></span>
-                    <span class="indicator" onclick="currentSlide(12)"></span>
-                    <span class="indicator" onclick="currentSlide(13)"></span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="diferenciais" class="diferenciais">
-        <div class="container">
-            <h2>Por que escolher Caio Martins?</h2>
-            <p class="section-subtitle">Resultados reais para pessoas reais</p>
-            <div class="diferenciais-grid">
-                <div class="diferencial-card">
-                    <div class="diferencial-icon">🏦</div>
-                    <h3>Estrutura Wiser | BTG Pactual</h3>
-                    <p>Acesso aos melhores produtos e estratégias do maior banco de investimentos da América Latina, com a proximidade de quem entende sua realidade.</p>
-                </div>
-                
-                <div class="diferencial-card">
-                    <div class="diferencial-icon">⏳</div>
-                    <h3>O Tempo é Seu Aliado</h3>
-                    <p>O tempo é o ativo mais valioso que temos. Cada dia que passa sem investir é uma oportunidade perdida de fazer seu dinheiro trabalhar para você.</p>
-                </div>
-                
-                <div class="diferencial-card">
-                    <div class="diferencial-icon">🎯</div>
-                    <h3>Assessoria Personalizada</h3>
-                    <p>Cada cliente é único. Desenvolvo estratégias sob medida para seu perfil, objetivos e momento de vida, sempre com transparência total.</p>
-                </div>
-                
-                <div class="diferencial-card">
-                    <div class="diferencial-icon">📚</div>
-                    <h3>Educação Financeira</h3>
-                    <p>Não apenas invisto seu dinheiro, mas te ensino a entender cada decisão. Conhecimento é poder, e você merece ter ambos.</p>
-                </div>
-                
-                <div class="diferencial-card">
-                    <div class="diferencial-icon">🤝</div>
-                    <h3>Relacionamento Próximo</h3>
-                    <p>Disponibilidade real, comunicação clara e acompanhamento constante. Você não é apenas um número, é um parceiro na jornada.</p>
-                </div>
-                
-                <div class="diferencial-card">
-                    <div class="diferencial-icon">📈</div>
-                    <h3>Resultados Comprovados</h3>
-                    <p>Histórico sólido de performance e clientes satisfeitos. Resultados reais para pessoas reais, sempre com foco no longo prazo.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="pilares" class="pilares">
-        <div class="container">
-            <h2>Meus Pilares de Trabalho</h2>
-            <p class="section-subtitle">Investimentos sérios para sonhos verdadeiros</p>
-            <div class="pilares-grid">
-                <div class="pilar-card">
-                    <div class="pilar-icon">⚡</div>
-                    <h3>Disponibilidade</h3>
-                    <p>Sempre presente quando você precisar, com respostas rápidas e atenção dedicada aos seus objetivos.</p>
-                </div>
-                
-                <div class="pilar-card">
-                    <div class="pilar-icon">🛡️</div>
-                    <h3>Confiança</h3>
-                    <p>Relacionamento baseado em transparência, ética e compromisso com seus melhores interesses.</p>
-                </div>
-                
-                <div class="pilar-card">
-                    <div class="pilar-icon">🔍</div>
-                    <h3>Transparência</h3>
-                    <p>Informações claras sobre riscos, custos e estratégias. Você sempre saberá exatamente onde está investindo.</p>
-                </div>
-                
-                <div class="pilar-card">
-                    <div class="pilar-icon">🎯</div>
-                    <h3>Entrega de Resultados</h3>
-                    <p>Foco total na performance e no alcance dos seus objetivos financeiros de forma consistente.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="servicos" class="servicos">
-        <div class="container">
-            <h2>Meus Serviços</h2>
-            <p class="section-subtitle">Investimentos que transformam gerações</p>
-            <div class="servicos-grid">
-                <div class="servico-card principal">
-                    <div class="servico-header">
-                        <h3>📊 Assessoria de Investimentos</h3>
-                        <span class="servico-badge">Principal</span>
+        <section id="depoimentos" class="depoimentos">
+            <div class="container">
+                <h2>O que meus clientes dizem</h2>
+                <div class="carousel-container">
+                    <div class="carousel" id="carousel-wrapper">
+                        <!-- ESTA ÁREA É INTENCIONALMENTE VAZIA. -->
+                        <!-- Os cards de depoimento são criados e inseridos aqui pelo script.js -->
                     </div>
-                    <p>Consultoria completa e personalizada para fazer seu patrimônio crescer com segurança e estratégia.</p>
-                    <ul>
-                        <li>Análise do seu perfil de risco</li>
-                        <li>Planejamento financeiro personalizado</li>
-                        <li>Recomendações de investimentos</li>
-                        <li>Acompanhamento contínuo dos resultados</li>
-                        <li>Educação financeira sem jargões</li>
-                    </ul>
-                </div>
-                
-                <div class="servico-card">
-                    <h3>🏠 Alavancagem Patrimonial Private</h3>
-                    <p>Estratégias sofisticadas através de cotas de empreendimentos imobiliários para multiplicar seu patrimônio.</p>
-                    <ul>
-                        <li>Compra pelo preço de custo com valorização já no lançamento</li>
-                        <li>Tributação reduzida: apenas 4% sobre venda vs 15% sobre ganho de capital</li>
-                        <li>Parcelamento em até 36x sem correção pelo INCC</li>
-                        <li>Retornos estimados entre 25% a 62% por empreendimento</li>
-                        <li>Potencial de renda passiva com locação convencional ou temporada</li>
-                    </ul>
-                </div>
-                
-                <div class="servico-card">
-                    <h3>💳 Alavancagem Patrimonial Acessível</h3>
-                    <p>Cartas de crédito de investimento imobiliário para quem está começando a diversificar.</p>
-                    <ul>
-                        <li>Rentabilidade média de 1,6% a 3% a.m., podendo ultrapassar 5% a.m.</li>
-                        <li>Recompra garantida de 20% ou venda a mercado com até 30% de lucro</li>
-                        <li>Parcelas reduzidas com segurança total</li>
-                        <li>Estratégia de múltiplas cartas para aumentar chances de contemplação</li>
-                        <li>Democratização do investimento imobiliário</li>
-                    </ul>
-                </div>
-                
-                <div class="servico-card">
-                    <h3>📋 Planejamento Sucessório</h3>
-                    <p>Estruturação para proteger e transferir seu patrimônio para as próximas gerações.</p>
-                    <ul>
-                        <li>Estruturação de patrimônio familiar</li>
-                        <li>Proteção de bens</li>
-                        <li>Otimização tributária</li>
-                        <li>Holding familiar</li>
-                        <li>Seguros de vida e previdência privada estratégica</li>
-                    </ul>
-                </div>
-                
-                <div class="servico-card">
-                    <h3>🏡 Planejamento de Aquisição</h3>
-                    <p>Orientação completa para carta de crédito e financiamento imobiliário.</p>
-                    <ul>
-                        <li>Consórcios imobiliários</li>
-                        <li>Estratégias de contemplação</li>
-                        <li>Análise de viabilidade</li>
-                        <li>Comparação com financiamento tradicional</li>
-                        <li>Negociação com bancos e estruturação da operação</li>
-                    </ul>
+                    <button class="carousel-control prev" id="prevBtn" aria-label="Depoimento Anterior">‹</button>
+                    <button class="carousel-control next" id="nextBtn" aria-label="Próximo Depoimento">›</button>
                 </div>
             </div>
-            
-            <div class="segmentacao">
-                <h3>Perfis patrimoniais que atendo:</h3>
-                <div class="segmentos-grid">
-                    <div class="segmento-card">
-                        <div class="segmento-icon">🚀</div>
-                        <h4>Starter</h4>
-                        <p>R$ 100k - R$ 300k</p>
-                        <span>Início da jornada</span>
+        </section>
+
+        <section id="diferenciais" class="diferenciais">
+            <div class="container">
+                <h2>Por que escolher Caio Martins?</h2>
+                <p class="section-subtitle">Resultados reais para pessoas reais</p>
+                <div class="diferenciais-grid">
+                    <div class="diferencial-card">
+                        <div class="diferencial-icon">🏦</div>
+                        <h3>Estrutura Wiser | BTG Pactual</h3>
+                        <p>Acesso aos melhores produtos e estratégias do maior banco de investimentos da América Latina, com a proximidade de quem entende sua realidade.</p>
                     </div>
                     
-                    <div class="segmento-card">
-                        <div class="segmento-icon">📈</div>
-                        <h4>Medium</h4>
-                        <p>R$ 300k - R$ 1M</p>
-                        <span>Expansão estratégica</span>
+                    <div class="diferencial-card">
+                        <div class="diferencial-icon">⏳</div>
+                        <h3>O Tempo é Seu Aliado</h3>
+                        <p>O tempo é o ativo mais valioso que temos. Cada dia que passa sem investir é uma oportunidade perdida de fazer seu dinheiro trabalhar para você.</p>
                     </div>
                     
-                    <div class="segmento-card">
-                        <div class="segmento-icon">🏗️</div>
-                        <h4>High</h4>
-                        <p>R$ 1M - R$ 5M</p>
-                        <span>Consolidação patrimonial</span>
+                    <div class="diferencial-card">
+                        <div class="diferencial-icon">🎯</div>
+                        <h3>Assessoria Personalizada</h3>
+                        <p>Cada cliente é único. Desenvolvo estratégias sob medida para seu perfil, objetivos e momento de vida, sempre com transparência total.</p>
                     </div>
                     
-                    <div class="segmento-card">
-                        <div class="segmento-icon">🌴</div>
-                        <h4>Private</h4>
-                        <p>R$ 5M+</p>
-                        <span>Liberdade e legado</span>
+                    <div class="diferencial-card">
+                        <div class="diferencial-icon">📚</div>
+                        <h3>Educação Financeira</h3>
+                        <p>Não apenas invisto seu dinheiro, mas te ensino a entender cada decisão. Conhecimento é poder, e você merece ter ambos.</p>
+                    </div>
+                    
+                    <div class="diferencial-card">
+                        <div class="diferencial-icon">🤝</div>
+                        <h3>Relacionamento Próximo</h3>
+                        <p>Disponibilidade real, comunicação clara e acompanhamento constante. Você não é apenas um número, é um parceiro na jornada.</p>
+                    </div>
+                    
+                    <div class="diferencial-card">
+                        <div class="diferencial-icon">📈</div>
+                        <h3>Resultados Comprovados</h3>
+                        <p>Histórico sólido de performance e clientes satisfeitos. Resultados reais para pessoas reais, sempre com foco no longo prazo.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contato" class="contato">
-        <div class="container">
-            <h2>Seu Presente Recomeça Aqui ⏳</h2>
-            <p class="contato-subtitle">Pronto para transformar sua vida financeira? Entre em contato e vamos conversar sobre seus objetivos e como posso te ajudar a alcançá-los.</p>
-            
-            <div class="formulario-container">
-                <form id="contatoForm" class="formulario">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="nome">Nome Completo *</label>
-                            <input type="text" id="nome" name="nome" required>
+        <section id="pilares" class="pilares">
+            <div class="container">
+                <h2>Meus Pilares de Trabalho</h2>
+                <p class="section-subtitle">Investimentos sérios para sonhos verdadeiros</p>
+                <div class="pilares-grid">
+                    <div class="pilar-card">
+                        <div class="pilar-icon">⚡</div>
+                        <h3>Disponibilidade</h3>
+                        <p>Sempre presente quando você precisar, com respostas rápidas e atenção dedicada aos seus objetivos.</p>
+                    </div>
+                    
+                    <div class="pilar-card">
+                        <div class="pilar-icon">🛡️</div>
+                        <h3>Confiança</h3>
+                        <p>Relacionamento baseado em transparência, ética e compromisso com seus melhores interesses.</p>
+                    </div>
+                    
+                    <div class="pilar-card">
+                        <div class="pilar-icon">🔍</div>
+                        <h3>Transparência</h3>
+                        <p>Informações claras sobre riscos, custos e estratégias. Você sempre saberá exatamente onde está investindo.</p>
+                    </div>
+                    
+                    <div class="pilar-card">
+                        <div class="pilar-icon">🎯</div>
+                        <h3>Entrega de Resultados</h3>
+                        <p>Foco total na performance e no alcance dos seus objetivos financeiros de forma consistente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicos" class="servicos">
+            <div class="container">
+                <h2>Meus Serviços</h2>
+                <p class="section-subtitle">Investimentos que transformam gerações</p>
+                <div class="servicos-grid">
+                    <div class="servico-card principal">
+                        <div class="servico-header">
+                            <h3>📊 Assessoria de Investimentos</h3>
+                            <span class="servico-badge">Principal</span>
+                        </div>
+                        <p>Consultoria completa e personalizada para fazer seu patrimônio crescer com segurança e estratégia.</p>
+                        <ul>
+                            <li>Análise do seu perfil de risco</li>
+                            <li>Planejamento financeiro personalizado</li>
+                            <li>Recomendações de investimentos</li>
+                            <li>Acompanhamento contínuo dos resultados</li>
+                            <li>Educação financeira sem jargões</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="servico-card">
+                        <h3>🏠 Alavancagem Patrimonial Private</h3>
+                        <p>Estratégias sofisticadas através de cotas de empreendimentos imobiliários para multiplicar seu patrimônio.</p>
+                        <ul>
+                            <li>Compra pelo preço de custo com valorização já no lançamento</li>
+                            <li>Tributação reduzida: apenas 4% sobre venda vs 15% sobre ganho de capital</li>
+                            <li>Parcelamento em até 36x sem correção pelo INCC</li>
+                            <li>Retornos estimados entre 25% a 62% por empreendimento</li>
+                            <li>Potencial de renda passiva com locação convencional ou temporada</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="servico-card">
+                        <h3>💳 Alavancagem Patrimonial Acessível</h3>
+                        <p>Cartas de crédito de investimento imobiliário para quem está começando a diversificar.</p>
+                        <ul>
+                            <li>Rentabilidade média de 1,6% a 3% a.m., podendo ultrapassar 5% a.m.</li>
+                            <li>Recompra garantida de 20% ou venda a mercado com até 30% de lucro</li>
+                            <li>Parcelas reduzidas com segurança total</li>
+                            <li>Estratégia de múltiplas cartas para aumentar chances de contemplação</li>
+                            <li>Democratização do investimento imobiliário</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="servico-card">
+                        <h3>📋 Planejamento Sucessório</h3>
+                        <p>Estruturação para proteger e transferir seu patrimônio para as próximas gerações.</p>
+                        <ul>
+                            <li>Estruturação de patrimônio familiar</li>
+                            <li>Proteção de bens</li>
+                            <li>Otimização tributária</li>
+                            <li>Holding familiar</li>
+                            <li>Seguros de vida e previdência privada estratégica</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="servico-card">
+                        <h3>🏡 Planejamento de Aquisição</h3>
+                        <p>Orientação completa para carta de crédito e financiamento imobiliário.</p>
+                        <ul>
+                            <li>Consórcios imobiliários</li>
+                            <li>Estratégias de contemplação</li>
+                            <li>Análise de viabilidade</li>
+                            <li>Comparação com financiamento tradicional</li>
+                            <li>Negociação com bancos e estruturação da operação</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="segmentacao">
+                    <h3>Perfis patrimoniais que atendo:</h3>
+                    <div class="segmentos-grid">
+                        <div class="segmento-card">
+                            <div class="segmento-icon">🚀</div>
+                            <h4>Starter</h4>
+                            <p>R$ 100k - R$ 300k</p>
+                            <span>Início da jornada</span>
+                        </div>
+                        
+                        <div class="segmento-card">
+                            <div class="segmento-icon">📈</div>
+                            <h4>Medium</h4>
+                            <p>R$ 300k - R$ 1M</p>
+                            <span>Expansão estratégica</span>
+                        </div>
+                        
+                        <div class="segmento-card">
+                            <div class="segmento-icon">🏗️</div>
+                            <h4>High</h4>
+                            <p>R$ 1M - R$ 5M</p>
+                            <span>Consolidação patrimonial</span>
+                        </div>
+                        
+                        <div class="segmento-card">
+                            <div class="segmento-icon">🌴</div>
+                            <h4>Private</h4>
+                            <p>R$ 5M+</p>
+                            <span>Liberdade e legado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="contato">
+            <div class="container">
+                <h2>Seu Presente Recomeça Aqui ⏳</h2>
+                <p class="contato-subtitle">Pronto para transformar sua vida financeira? Entre em contato e vamos conversar sobre seus objetivos e como posso te ajudar a alcançá-los.</p>
+                
+                <div class="formulario-container">
+                    <form id="contatoForm" class="formulario">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nome">Nome Completo *</label>
+                                <input type="text" id="nome" name="nome" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">E-mail *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="telefone">Telefone/WhatsApp *</label>
+                                <input type="tel" id="telefone" name="telefone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="patrimonio">Faixa de Patrimônio *</label>
+                                <select id="patrimonio" name="patrimonio" required>
+                                    <option value="" disabled selected>Selecione sua faixa</option>
+                                    <option value="Starter (R$ 100k - R$ 300k)">Starter (R$ 100k - R$ 300k)</option>
+                                    <option value="Medium (R$ 300k - R$ 1M)">Medium (R$ 300k - R$ 1M)</option>
+                                    <option value="High (R$ 1M - R$ 5M)">High (R$ 1M - R$ 5M)</option>
+                                    <option value="Private (R$ 5M+)">Private (R$ 5M+)</option>
+                                </select>
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">E-mail *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="telefone">Telefone/WhatsApp *</label>
-                            <input type="tel" id="telefone" name="telefone" required>
+                            <label for="objetivos">Quais são seus principais objetivos financeiros?</label>
+                            <textarea id="objetivos" name="objetivos" rows="4" placeholder="Ex: Aposentadoria, compra de imóvel, educação dos filhos, etc."></textarea>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="patrimonio">Faixa de Patrimônio *</label>
-                            <select id="patrimonio" name="patrimonio" required>
-                                <option value="">Selecione sua faixa</option>
-                                <option value="starter">Starter (R$ 100k - R$ 300k)</option>
-                                <option value="medium">Medium (R$ 300k - R$ 1M)</option>
-                                <option value="high">High (R$ 1M - R$ 5M)</option>
-                                <option value="private">Private (R$ 5M+)</option>
-                            </select>
+                        <button type="submit" class="cta-button-large">Vamos Conversar!</button>
+                    </form>
+                </div>
+                
+                <div class="contato-info">
+                    <div class="contato-item">
+                        <img src="Whatsapp.png" alt="Logo WhatsApp" class="contato-logo">
+                        <div class="contato-details">
+                            <h4>WhatsApp</h4>
+                            <a href="https://wa.me/5511941174028" target="_blank">(11 ) 94117-4028</a>
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="objetivos">Quais são seus principais objetivos financeiros?</label>
-                        <textarea id="objetivos" name="objetivos" rows="4" placeholder="Ex: Aposentadoria, compra de imóvel, educação dos filhos, etc."></textarea>
+                    <div class="contato-item">
+                        <img src="Email-3d.png" alt="Logo de E-mail" class="contato-logo">
+                        <div class="contato-details">
+                            <h4>E-mail</h4>
+                            <a href="mailto:caio.martins@wiseaai.com.br">caio.martins@wiseaai.com.br</a>
+                        </div>
                     </div>
                     
-                    <button type="submit" class="cta-button-large">Vamos Conversar!</button>
-                </form>
-            </div>
-            
-            <div class="contato-info">
-                <div class="contato-item">
-                    <img src="Whatsapp.png" alt="Logo WhatsApp" class="contato-logo">
-                    <div class="contato-details">
-                        <h4>WhatsApp</h4>
-                        <a href="https://wa.me/5511941174028" target="_blank">(11 ) 94117-4028</a>
-                    </div>
-                </div>
-                
-                <div class="contato-item">
-                    <img src="Email-3d.png" alt="Logo de E-mail" class="contato-logo">
-                    <div class="contato-details">
-                        <h4>E-mail</h4>
-                        <a href="mailto:caio.martins@wiseaai.com.br">caio.martins@wiseaai.com.br</a>
-                    </div>
-                </div>
-                
-                <div class="contato-item">
-                    <img src="escritorio.png" alt="Logo do Escritório" class="contato-logo">
-                    <div class="contato-details">
-                        <h4>Escritório</h4>
-                        <p>Alameda São&nbsp;Caetano, 612  
+                    <div class="contato-item">
+                        <img src="escritorio.png" alt="Logo do Escritório" class="contato-logo">
+                        <div class="contato-details">
+                            <h4>Escritório</h4>
+                            <p>Alameda São&nbsp;Caetano, 612  
 Bairro Jardim -&nbsp;Santo André/SP</p>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="contato-item">
-                    <img src="instagram.png" alt="Logo Instagram" class="contato-logo">
-                    <div class="contato-details">
-                        <h4>Instagram</h4>
-                        <div class="instagram-links">
-                            <a href="https://instagram.com/caio.wiserabc" target="_blank">@caio.wiserabc</a>
-                            <a href="https://instagram.com/seja_wiser" target="_blank">@seja_wiser</a>
+                    
+                    <div class="contato-item">
+                        <img src="instagram.png" alt="Logo Instagram" class="contato-logo">
+                        <div class="contato-details">
+                            <h4>Instagram</h4>
+                            <div class="instagram-links">
+                                <a href="https://instagram.com/caio.wiserabc" target="_blank">@caio.wiserabc</a>
+                                <a href="https://instagram.com/seja_wiser" target="_blank">@seja_wiser</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
