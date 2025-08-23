@@ -265,15 +265,15 @@ p {
     max-width: 900px;
     margin: 0 auto;
     height: 400px; 
-    perspective: 1200px; /* A perspectiva 3D fica no container pai */
+    perspective: 1200px;
 }
 
 .carousel {
     position: relative;
     width: 100%;
     height: 100%;
-    transform-style: preserve-3d; /* Habilita o espaço 3D para os filhos */
-    transition: var(--transition); /* Transição suave para o palco */
+    transform-style: preserve-3d;
+    transition: var(--transition);
 }
 
 .depoimento-card {
@@ -297,10 +297,9 @@ p {
     cursor: pointer;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    transform-origin: center center; /* Garante que a rotação seja no centro */
+    transform-origin: center center;
 }
 
-/* Card Ativo (Central) */
 .depoimento-card.active {
     transform: translateX(0) translateZ(0) rotateY(0);
     opacity: 1;
@@ -308,21 +307,18 @@ p {
     cursor: default;
 }
 
-/* Card Anterior (Esquerda) */
 .depoimento-card.prev {
     transform: translateX(-55%) translateZ(-150px) rotateY(30deg);
     opacity: 0.6;
     z-index: 5;
 }
 
-/* Card Próximo (Direita) */
 .depoimento-card.next {
     transform: translateX(55%) translateZ(-150px) rotateY(-30deg);
     opacity: 0.6;
     z-index: 5;
 }
 
-/* Cards distantes para uma transição suave */
 .depoimento-card.far-prev {
     transform: translateX(-110%) translateZ(-300px) rotateY(35deg);
     opacity: 0;
@@ -360,21 +356,21 @@ p {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(27, 54, 93, 0.5);
-    color: var(--branco);
+    background-color: transparent; /* << ALTERAÇÃO: Fundo transparente */
+    color: var(--azul-marinho);   /* << ALTERAÇÃO: Cor da seta */
     border: none;
-    border-radius: 50%;
     width: 50px;
     height: 50px;
-    font-size: 2rem;
+    font-size: 3rem; /* Aumenta o tamanho da seta para melhor visibilidade */
     font-weight: bold;
     cursor: pointer;
     z-index: 20;
-    transition: background-color 0.3s ease;
+    transition: color 0.3s ease; /* Transição na cor da seta */
+    text-shadow: 0 1px 3px rgba(255,255,255,0.4); /* Sombra para destacar a seta */
 }
 
 .carousel-control:hover {
-    background-color: var(--azul-marinho);
+    color: var(--prata); /* << ALTERAÇÃO: Muda a cor no hover */
 }
 
 .carousel-control.prev {
@@ -901,7 +897,7 @@ p {
     .carousel-control {
         width: 40px;
         height: 40px;
-        font-size: 1.5rem;
+        font-size: 2.5rem; /* Aumenta a seta no mobile também */
     }
 
     .carousel-control.prev {
