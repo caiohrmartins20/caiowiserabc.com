@@ -879,7 +879,7 @@ p {
         overflow-wrap: break-word;
     }
 
-    /* Contato */
+    /* Alteração para o Contato */
     .contato-info {
         grid-template-columns: 1fr;
         gap: var(--spacing-md);
@@ -887,9 +887,9 @@ p {
     }
 
     .contato-item {
-        display: flex;
-        flex-direction: row; /* Alinha ícone e texto na horizontal */
-        align-items: center; /* Centraliza verticalmente a caixa de texto com o ícone */
+        flex-direction: row; /* Volta a alinhar na horizontal no mobile */
+        align-items: center;
+        text-align: left;
         padding: var(--spacing-md) var(--spacing-sm);
         gap: var(--spacing-sm);
     }
@@ -898,15 +898,9 @@ p {
         margin-bottom: 0;
     }
 
-    /* CORREÇÃO AQUI: Garante que os textos dentro da caixa de detalhes estejam alinhados */
     .contato-details {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start; /* Alinha os textos à esquerda */
         text-align: left;
-        gap: 0.25rem;
     }
-    
 }
 
 @media (max-width: 480px) {
