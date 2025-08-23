@@ -888,8 +888,8 @@ p {
 
     .contato-item {
         display: flex;
-        flex-direction: row; /* Alinha ícone e texto na horizontal */
-        align-items: center; /* Centraliza verticalmente a caixa de texto com o ícone */
+        flex-direction: row;
+        align-items: center; /* Centraliza a caixa de texto com o ícone */
         padding: var(--spacing-md) var(--spacing-sm);
         gap: var(--spacing-sm);
     }
@@ -898,13 +898,27 @@ p {
         margin-bottom: 0;
     }
 
-    /* CORREÇÃO AQUI: Garante que os textos dentro da caixa de detalhes estejam centralizados */
+    /* CORREÇÃO DEFINITIVA AQUI: Força o alinhamento para todos os elementos de texto */
     .contato-details {
         display: flex;
         flex-direction: column;
-        align-items: center; /* Alinha os textos no centro da caixa */
-        text-align: center; /* Centraliza o texto */
+        align-items: center; /* Centraliza os textos dentro da caixa */
         gap: 0.25rem;
+    }
+
+    .contato-details h4,
+    .contato-details p,
+    .contato-details a,
+    .instagram-links {
+        text-align: center;
+        width: 100%; /* Garante que os elementos preencham a largura para o alinhamento */
+    }
+
+    .instagram-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-xs);
     }
     
 }
