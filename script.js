@@ -18,10 +18,10 @@ function initCarousel() {
 
     showSlide(0);
 
-    // Auto-slide
+    // Auto-slide a cada 10 segundos
     autoSlideInterval = setInterval(() => {
         nextSlide(slides, indicators);
-    }, 10000); // 10 segundos
+    }, 10000); // 10000 ms = 10 segundos
 
     // Eventos indicadores
     indicators.forEach((indicator, index) => {
@@ -76,7 +76,7 @@ function resetAutoSlide(slides, indicators) {
 function startAutoSlide(slides, indicators) {
     autoSlideInterval = setInterval(() => {
         nextSlide(slides, indicators);
-    }, 10000);
+    }, 10000); // Mantém 10 segundos
 }
 
 // ===== MENU MOBILE =====
