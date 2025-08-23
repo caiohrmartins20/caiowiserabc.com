@@ -889,7 +889,7 @@ p {
     .contato-item {
         display: flex;
         flex-direction: row;
-        align-items: center; /* Centraliza a caixa de texto com o ícone */
+        align-items: center;
         padding: var(--spacing-md) var(--spacing-sm);
         gap: var(--spacing-sm);
     }
@@ -897,21 +897,20 @@ p {
     .contato-logo {
         margin-bottom: 0;
     }
-
-    /* CORREÇÃO DEFINITIVA AQUI: Força o alinhamento para todos os elementos de texto */
+    
     .contato-details {
         display: flex;
         flex-direction: column;
-        align-items: center; /* Centraliza os textos dentro da caixa */
+        align-items: center;
         gap: 0.25rem;
-        text-align: center;
     }
 
+    /* Regra definitiva de alinhamento para os textos */
     .contato-details h4,
     .contato-details p,
     .contato-details a,
     .instagram-links {
-        text-align: center !important; /* FORÇA o alinhamento para o centro */
+        text-align: center !important;
         width: 100%;
     }
 
