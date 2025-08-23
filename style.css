@@ -898,12 +898,12 @@ p {
         margin-bottom: 0;
     }
 
-    /* CORREÇÃO AQUI: Garante que os textos dentro da caixa de detalhes estejam alinhados */
+    /* CORREÇÃO AQUI: Garante que os textos dentro da caixa de detalhes estejam centralizados */
     .contato-details {
         display: flex;
         flex-direction: column;
-        align-items: flex-start; /* Alinha os textos à esquerda */
-        text-align: left;
+        align-items: center; /* Alinha os textos no centro da caixa */
+        text-align: center; /* Centraliza o texto */
         gap: 0.25rem;
     }
     
