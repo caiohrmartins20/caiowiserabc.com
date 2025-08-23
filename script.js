@@ -1,133 +1,123 @@
 // Variáveis globais
 let currentSlide = 0;
-const slides = document.querySelectorAll('.depoimento-card');
-const indicators = document.querySelectorAll('.indicator');
 let autoSlideInterval;
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
     initCarousel();
     initForm();
+    initScrollSmooth();
+    initPhoneFormat();
 });
 
-// ===== CARROSSEL DE DEPOIMENTOS =====
-
+// ===== CARROSSEL DE DEPOIMENTOS MODERNO =====
 function initCarousel() {
-    if (slides.length === 0) return;
-    
+    const slides = document.querySelectorAll('.depoimento-card');
+    const indicators = document.querySelectorAll('.indicator');
+    if (slides.length === 0 || indicators.length === 0) return;
+
     showSlide(0);
-    startAutoSlide();
-    
+
+    // Auto-slide
+    autoSlideInterval = setInterval(() => {
+        nextSlide(slides, indicators);
+    }, 10000); // 10 segundos
+
+    // Eventos indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            currentSlide = index;
+            updateCarousel(slides, indicators);
+            resetAutoSlide(slides, indicators);
+        });
+    });
+
     // Pausar auto-slide quando hover no carrossel
     const carousel = document.querySelector('.carousel-container');
     if (carousel) {
-        carousel.addEventListener('mouseenter', stopAutoSlide);
-        carousel.addEventListener('mouseleave', startAutoSlide);
+        carousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+        carousel.addEventListener('mouseleave', () => startAutoSlide(slides, indicators));
     }
 }
 
-function showSlide(n) {
-    // Esconder todos os slides
-    slides.forEach(slide => {
-        slide.classList.remove('active');
-        slide.style.display = 'none';
-    });
-    
-    // Remover active de todos os indicadores
-    indicators.forEach(indicator => {
-        indicator.classList.remove('active');
-    });
-    
-    // Ajustar índice se necessário
-    if (n >= slides.length) currentSlide = 0;
-    if (n < 0) currentSlide = slides.length - 1;
-    
-    // Mostrar slide atual
-    if (slides[currentSlide]) {
-        slides[currentSlide].classList.add('active');
-        slides[currentSlide].style.display = 'flex';
-    }
-    
-    // Ativar indicador correspondente
-    if (indicators[currentSlide]) {
-        indicators[currentSlide].classList.add('active');
-    }
+function showSlide(index) {
+    const slides = document.querySelectorAll('.depoimento-card');
+    const indicators = document.querySelectorAll('.indicator');
+    if (slides.length === 0 || indicators.length === 0) return;
+
+    slides.forEach(slide => slide.style.display = 'none');
+    indicators.forEach(ind => ind.classList.remove('active'));
+
+    slides[index].style.display = 'flex';
+    slides[index].classList.add('active');
+    indicators[index].classList.add('active');
 }
 
-function currentSlideFunc(n) {
-    currentSlide = n - 1;
-    showSlide(currentSlide);
-    resetAutoSlide();
+function nextSlide(slides, indicators) {
+    currentSlide++;
+    if (currentSlide >= slides.length) currentSlide = 0;
+    updateCarousel(slides, indicators);
 }
 
-function startAutoSlide() {
-    autoSlideInterval = setInterval(() => {
-        currentSlide++;
-        showSlide(currentSlide);
-    }, 15000); // 15 segundos
+function updateCarousel(slides, indicators) {
+    slides.forEach(slide => slide.style.display = 'none');
+    indicators.forEach(ind => ind.classList.remove('active'));
+
+    slides[currentSlide].style.display = 'flex';
+    slides[currentSlide].classList.add('active');
+    indicators[currentSlide].classList.add('active');
 }
 
-function stopAutoSlide() {
+function resetAutoSlide(slides, indicators) {
     clearInterval(autoSlideInterval);
+    startAutoSlide(slides, indicators);
 }
 
-function resetAutoSlide() {
-    stopAutoSlide();
-    startAutoSlide();
+function startAutoSlide(slides, indicators) {
+    autoSlideInterval = setInterval(() => {
+        nextSlide(slides, indicators);
+    }, 10000);
 }
 
 // ===== MENU MOBILE =====
-
-    const menuToggle = document.querySelector('.menu-toggle');
-    const mobileMenu = document.querySelector('.mobile-menu');
-    
-    if (menuToggle && mobileMenu) {
-
-
-
-// ===== FORMULÁRIO DE CONTATO =====
-
-function initForm() {
-    const form = document.getElementById('contatoForm');
-    if (form) {
-        form.addEventListener('submit', handleFormSubmit);
-    }
+const menuToggle = document.querySelector('.menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('open');
+    });
 }
 
-function handleFormSubmit(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData);
-    
-    // Validação básica
-    if (!data.nome || !data.email || !data.telefone || !data.patrimonio) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
-        return;
-    }
-    
-    // Redirecionar diretamente para WhatsApp
-    sendWhatsApp(data);
+// ===== FORMULÁRIO DE CONTATO =====
+function initForm() {
+    const form = document.getElementById('contatoForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+        if (!data.nome || !data.email || !data.telefone || !data.patrimonio) {
+            alert('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+
+        sendWhatsApp(data);
+    });
 }
 
 function sendWhatsApp(data) {
-    // Função para capitalizar primeira letra
-    function capitalizeFirst(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    }
-    
-    // Função para deixar em minúscula
-    function toLowerCase(str) {
-        return str.toLowerCase();
-    }
-    
+    const capitalizeFirst = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    const toLowerCase = str => str.toLowerCase();
+
     const message = `
 Olá, Caio! Vim através do seu site.
 
 Nome: ${capitalizeFirst(data.nome)}
 E-mail: ${toLowerCase(data.email)}
 Telefone: ${data.telefone}
-Faixa de Patrimônio: ${toLowerCase(data.patrimonio)}
+Faixa de Patrimônio: ${data.patrimonio}
 Objetivos: ${toLowerCase(data.objetivos || 'não informado')}
 
 Gostaria de agendar uma conversa com você.
@@ -135,54 +125,51 @@ Gostaria de agendar uma conversa com você.
     
     const whatsappNumber = '5511941174028';
     const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-    
-    // Mostrar mensagem de sucesso
+
     alert('Formulário enviado! Você será redirecionado para o WhatsApp.');
-    
-    // Redirecionar para WhatsApp após 1 segundo
-    setTimeout(() => {
-        window.open(whatsappLink, '_blank');
-    }, 1000);
-    
-    // Limpar formulário
-    document.getElementById('contatoForm').reset();
+
+    setTimeout(() => window.open(whatsappLink, '_blank'), 1000);
+
+    form.reset();
 }
 
 // ===== SCROLL SUAVE =====
-
-// Adicionar scroll suave para links internos
-document.addEventListener('DOMContentLoaded', function() {
+function initScrollSmooth() {
     const links = document.querySelectorAll('a[href^="#"]');
-    
     links.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                const headerHeight = document.querySelector('.header-fixed').offsetHeight;
-                const targetPosition = targetElement.offsetTop - headerHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Fechar menu mobile se estiver aberto
+            if (!targetElement) return;
 
-// Aplicar formatação de telefone
-document.addEventListener('DOMContentLoaded', function() {
-    const phoneInput = document.getElementById('telefone');
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function() {
-            formatPhone(this);
+            const headerHeight = document.querySelector('.header-fixed').offsetHeight;
+            const targetPosition = targetElement.offsetTop - headerHeight - 20;
+
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (mobileMenu && mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.remove('open');
+            }
         });
-    }
-});
+    });
+}
 
-// ===== EXPOSIÇÃO DE FUNÇÕES GLOBAIS =====
+// ===== FORMATO TELEFONE =====
+function initPhoneFormat() {
+    const phoneInput = document.getElementById('telefone');
+    if (!phoneInput) return;
+    phoneInput.addEventListener('input', function() {
+        formatPhone(this);
+    });
+}
 
-// Expor funções para uso nos botões HTML
-window.currentSlide = currentSlideFunc;
+function formatPhone(input) {
+    let value = input.value.replace(/\D/g, '');
+    if (value.length > 10) value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+    else if (value.length > 5) value = value.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, '($1) $2-$3');
+    else if (value.length > 2) value = value.replace(/^(\d{2})(\d{0,5})/, '($1) $2');
+    else value = value.replace(/^(\d*)/, '($1');
+    input.value = value;
+}
