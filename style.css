@@ -41,7 +41,7 @@ body {
     line-height: 1.6;
     color: var(--preto);
     background-color: var(--branco);
-    padding-top: 100px; /* Espaço para header maior */
+    padding-top: 100px;
 }
 
 .container {
@@ -112,7 +112,7 @@ p {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-sm);
-    height: 80px; /* Altura aumentada para logo maior */
+    height: 80px;
 }
 
 .nav-left, .nav-center, .nav-right {
@@ -136,7 +136,7 @@ p {
 
 /* Logo */
 .logo {
-    height: 70px; /* Logo maior */
+    height: 70px;
     width: auto;
     object-fit: contain;
 }
@@ -256,16 +256,16 @@ p {
 .depoimentos {
     padding: var(--spacing-xl) 0;
     background: var(--cinza-claro);
-    overflow-x: hidden; /* Previne barras de rolagem horizontais */
+    overflow-x: hidden;
 }
 
 .carousel-container {
     position: relative;
     width: 100%;
-    max-width: 900px; /* Aumenta um pouco para dar espaço aos botões */
+    max-width: 900px;
     margin: 0 auto;
     height: 400px; 
-    perspective: 1200px; /* Define a perspectiva 3D */
+    perspective: 1200px; /* A perspectiva 3D fica no container pai */
 }
 
 .carousel {
@@ -273,6 +273,7 @@ p {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d; /* Habilita o espaço 3D para os filhos */
+    transition: var(--transition); /* Transição suave para o palco */
 }
 
 .depoimento-card {
@@ -294,43 +295,44 @@ p {
     text-align: center;
     transition: var(--transition);
     cursor: pointer;
-    -webkit-backface-visibility: hidden; /* Melhora performance da animação */
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    transform-origin: center center; /* Garante que a rotação seja no centro */
 }
 
 /* Card Ativo (Central) */
 .depoimento-card.active {
-    transform: translateZ(0);
+    transform: translateX(0) translateZ(0) rotateY(0);
     opacity: 1;
-    z-index: 10; /* << z-index ALTO para ficar na frente */
+    z-index: 10;
     cursor: default;
 }
 
 /* Card Anterior (Esquerda) */
 .depoimento-card.prev {
-    transform: translateX(-55%) rotateY(-30deg);
+    transform: translateX(-55%) translateZ(-150px) rotateY(30deg);
     opacity: 0.6;
-    z-index: 5; /* << z-index MÉDIO */
+    z-index: 5;
 }
 
 /* Card Próximo (Direita) */
 .depoimento-card.next {
-    transform: translateX(55%) rotateY(30deg);
+    transform: translateX(55%) translateZ(-150px) rotateY(-30deg);
     opacity: 0.6;
-    z-index: 5; /* << z-index MÉDIO */
+    z-index: 5;
 }
 
 /* Cards distantes para uma transição suave */
 .depoimento-card.far-prev {
-    transform: translateX(-110%) rotateY(-35deg) scale(0.9);
+    transform: translateX(-110%) translateZ(-300px) rotateY(35deg);
     opacity: 0;
-    z-index: 1; /* << z-index BAIXO para ficar atrás de todos */
+    z-index: 1;
 }
 
 .depoimento-card.far-next {
-    transform: translateX(110%) rotateY(35deg) scale(0.9);
+    transform: translateX(110%) translateZ(-300px) rotateY(-35deg);
     opacity: 0;
-    z-index: 1; /* << z-index BAIXO para ficar atrás de todos */
+    z-index: 1;
 }
 
 .depoimento-content p {
@@ -880,20 +882,20 @@ p {
 
     /* Carrossel Mobile */
     .carousel-container {
-        height: 450px; /* Aumenta a altura no mobile para melhor leitura */
+        height: 450px;
     }
 
     .depoimento-card {
-        width: 80%; /* Ocupa mais espaço na tela */
+        width: 80%;
         padding: var(--spacing-md);
     }
 
     .depoimento-card.prev {
-        transform: translateX(-40%) rotateY(-20deg) scale(0.8);
+        transform: translateX(-40%) translateZ(-100px) rotateY(20deg);
     }
 
     .depoimento-card.next {
-        transform: translateX(40%) rotateY(20deg) scale(0.8);
+        transform: translateX(40%) translateZ(-100px) rotateY(-20deg);
     }
 
     .carousel-control {
