@@ -1,0 +1,516 @@
+/* =================================================================================
+   LANDING PAGE - ASSESSORIA DE INVESTIMENTOS
+   ================================================================================= */
+
+/* Hero Section */
+.lp-hero {
+    background: linear-gradient(135deg, var(--azul-marinho) 0%, #2A4A73 100%);
+    padding: calc(var(--spacing-xl) * 2) 0;
+    margin-top: 80px;
+    color: white;
+}
+
+.lp-hero-content {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.lp-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+    line-height: 1.2;
+}
+
+.lp-hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    opacity: 0.9;
+}
+
+.lp-hero-benefits {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    flex-wrap: wrap;
+}
+
+.lp-hero-benefit {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.benefit-icon {
+    font-size: 1.5rem;
+    color: #F8D210;
+}
+
+.lp-hero-ctas {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-primary, .btn-secondary {
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: #F8D210;
+    color: var(--azul-marinho);
+}
+
+.btn-primary:hover {
+    background: #E5C000;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: var(--azul-marinho);
+}
+
+/* Benefits Section */
+.lp-benefits {
+    padding: calc(var(--spacing-xl) * 2) 0;
+    background: white;
+}
+
+.lp-benefits h2, .lp-process h2, .lp-target h2, .lp-differentials h2, .lp-testimonials h2, .lp-faq h2, .lp-cta-final h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--azul-marinho);
+    margin-bottom: var(--spacing-sm);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #6B7280;
+    margin-bottom: var(--spacing-xl);
+}
+
+.lp-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.lp-benefit-card {
+    background: #F9FAFB;
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.lp-benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(27, 54, 93, 0.1);
+}
+
+.lp-benefit-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.lp-benefit-card h3 {
+    color: var(--azul-marinho);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.lp-benefit-card p {
+    color: #6B7280;
+    line-height: 1.6;
+}
+
+/* Process Section */
+.lp-process {
+    padding: calc(var(--spacing-xl) * 2) 0;
+    background: #F9FAFB;
+}
+
+.lp-process-steps {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-md);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.lp-step {
+    flex: 1;
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.lp-step-number {
+    width: 60px;
+    height: 60px;
+    background: var(--azul-marinho);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto var(--spacing-md);
+}
+
+.lp-step h3 {
+    color: var(--azul-marinho);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.lp-step p {
+    color: #6B7280;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.lp-step-arrow {
+    font-size: 2rem;
+    color: var(--azul-marinho);
+    font-weight: 700;
+}
+
+/* Target Section */
+.lp-target {
+    padding: calc(var(--spacing-xl) * 2) 0;
+    background: white;
+}
+
+.lp-target-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.lp-target-card {
+    background: #F9FAFB;
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    border-left: 4px solid var(--azul-marinho);
+}
+
+.lp-target-card h3 {
+    color: var(--azul-marinho);
+    font-size: 1.2rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.lp-target-card p {
+    color: #6B7280;
+    line-height: 1.6;
+}
+
+/* Differentials Section */
+.lp-differentials {
+    padding: calc(var(--spacing-xl) * 2) 0;
+    background: #F9FAFB;
+}
+
+.lp-differentials-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.lp-differential-item {
+    display: flex;
+    gap: var(--spacing-md);
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    align-items: flex-start;
+}
+
+.lp-differential-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.lp-differential-text h3 {
+    color: var(--azul-marinho);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.lp-differential-text p {
+    color: #6B7280;
+    line-height: 1.6;
+}
+
+/* Testimonials Section */
+.lp-testimonials {
+    padding: calc(var(--spacing-xl) * 2) 0;
+    background: white;
+}
+
+.lp-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.lp-testimonial-card {
+    background: #F9FAFB;
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.lp-testimonial-text {
+    color: #374151;
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+    font-style: italic;
+}
+
+.lp-testimonial-author {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.lp-testimonial-author strong {
+    color: var(--azul-marinho);
+    font-size: 1.1rem;
+}
+
+.lp-testimonial-author span {
+    color: #6B7280;
+    font-size: 0.9rem;
+}
+
+/* FAQ Section */
+.lp-faq {
+    padding: calc(var(--spacing-xl) * 2) 0;
+    background: #F9FAFB;
+}
+
+.lp-faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.lp-faq-item {
+    background: white;
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    margin-bottom: var(--spacing-md);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.lp-faq-item h3 {
+    color: var(--azul-marinho);
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.lp-faq-item p {
+    color: #6B7280;
+    line-height: 1.7;
+}
+
+/* CTA Final Section */
+.lp-cta-final {
+    padding: calc(var(--spacing-xl) * 2) 0;
+    background: linear-gradient(135deg, var(--azul-marinho) 0%, #2A4A73 100%);
+    color: white;
+}
+
+.lp-cta-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-xl);
+    opacity: 0.9;
+}
+
+.lp-cta-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--spacing-xl);
+    align-items: start;
+}
+
+.lp-cta-form {
+    background: white;
+    padding: var(--spacing-xl);
+    border-radius: 12px;
+}
+
+.lp-cta-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.lp-cta-form .form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.lp-cta-form label {
+    display: block;
+    color: var(--azul-marinho);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.lp-cta-form input,
+.lp-cta-form select,
+.lp-cta-form textarea {
+    width: 100%;
+    padding: var(--spacing-sm);
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+}
+
+.lp-cta-form input:focus,
+.lp-cta-form select:focus,
+.lp-cta-form textarea:focus {
+    outline: none;
+    border-color: var(--azul-marinho);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: var(--azul-marinho);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: #2A4A73;
+    transform: translateY(-2px);
+}
+
+.lp-cta-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.lp-contact-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.lp-contact-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.lp-contact-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.contact-icon {
+    font-size: 2rem;
+}
+
+.lp-contact-btn strong {
+    display: block;
+    font-size: 1.1rem;
+}
+
+.lp-contact-btn span {
+    display: block;
+    opacity: 0.9;
+    font-size: 0.95rem;
+}
+
+.lp-trust-badges {
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+}
+
+.lp-trust-badges p {
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.lp-trust-badges p:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .lp-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .lp-hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .lp-hero-benefits {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .lp-process-steps {
+        flex-direction: column;
+    }
+    
+    .lp-step-arrow {
+        transform: rotate(90deg);
+    }
+    
+    .lp-cta-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .lp-cta-form .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .lp-differentials-content,
+    .lp-benefits-grid,
+    .lp-target-grid,
+    .lp-testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
