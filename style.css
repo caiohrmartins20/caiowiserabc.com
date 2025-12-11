@@ -1006,3 +1006,199 @@ p {
         font-size: 0.9rem;
     }
 }
+
+
+/* Seção Institucional Wiser | BTG */
+.institutional-section {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--branco);
+}
+
+.institutional-content {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: var(--spacing-lg);
+    align-items: start;
+}
+
+.institutional-left h2 {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--azul-marinho);
+    margin-bottom: var(--spacing-sm);
+}
+
+.institutional-left .section-subtitle {
+    font-size: 1.1rem;
+    color: #6B7280;
+    margin-bottom: var(--spacing-lg);
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.stat-icon {
+    font-size: 2rem;
+}
+
+.stat-number {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--azul-marinho);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6B7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+}
+
+.btg-section {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 2px solid var(--cinza-medio);
+}
+
+.btg-title {
+    font-family: var(--font-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--azul-marinho);
+    margin-bottom: var(--spacing-md);
+}
+
+.btg-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.btg-aum {
+    text-align: left;
+}
+
+.aum-number {
+    font-family: var(--font-primary);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--azul-marinho);
+    line-height: 1;
+}
+
+.aum-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #6B7280;
+    margin-bottom: var(--spacing-xs);
+}
+
+.aum-description {
+    font-size: 0.9rem;
+    color: #6B7280;
+    line-height: 1.4;
+}
+
+.btg-badge {
+    background: var(--azul-marinho);
+    padding: var(--spacing-md);
+    border-radius: 15px;
+    text-align: center;
+}
+
+.btg-rating .stars {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-xs);
+    color: #F8D210;
+}
+
+.award-text {
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--branco);
+    margin-bottom: 0.25rem;
+}
+
+.source {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.institutional-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.caio-photo-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.foto-caio-institutional {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(27, 54, 93, 0.15);
+}
+
+/* Responsividade da Seção Institucional */
+@media (max-width: 968px) {
+    .institutional-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-sm);
+    }
+    
+    .btg-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .institutional-right {
+        order: -1;
+    }
+    
+    .caio-photo-container {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .institutional-left h2 {
+        font-size: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .aum-number {
+        font-size: 2.5rem;
+    }
+    
+    .btg-badge {
+        padding: var(--spacing-sm);
+    }
+}
+
