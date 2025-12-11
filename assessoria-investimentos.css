@@ -5,7 +5,7 @@
 /* Hero Section */
 .lp-hero {
     background: linear-gradient(135deg, var(--azul-marinho) 0%, #2A4A73 100%);
-    padding: calc(var(--spacing-xl) * 2) 0;
+    padding: calc(var(--spacing-xl) * 2) var(--spacing-sm);
     margin-top: 80px;
     color: white;
 }
@@ -17,16 +17,18 @@
 }
 
 .lp-hero h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: var(--spacing-md);
     line-height: 1.2;
+    color: white;
 }
 
 .lp-hero-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     margin-bottom: var(--spacing-lg);
-    opacity: 0.9;
+    opacity: 0.95;
+    color: white;
 }
 
 .lp-hero-benefits {
@@ -41,11 +43,13 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
+    font-size: 1rem;
 }
 
 .benefit-icon {
     font-size: 1.5rem;
     color: #F8D210;
+    flex-shrink: 0;
 }
 
 .lp-hero-ctas {
@@ -56,12 +60,13 @@
 }
 
 .btn-primary, .btn-secondary {
-    padding: var(--spacing-md) var(--spacing-lg);
+    padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: 8px;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
     display: inline-block;
+    font-size: 1rem;
 }
 
 .btn-primary {
@@ -72,6 +77,7 @@
 .btn-primary:hover {
     background: #E5C000;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(248, 210, 16, 0.3);
 }
 
 .btn-secondary {
@@ -87,18 +93,18 @@
 
 /* Benefits Section */
 .lp-benefits {
-    padding: calc(var(--spacing-xl) * 2) 0;
+    padding: calc(var(--spacing-xl) * 2) var(--spacing-sm);
     background: white;
 }
 
 .lp-benefits h2, .lp-process h2, .lp-target h2, .lp-differentials h2, .lp-testimonials h2, .lp-faq h2, .lp-cta-final h2 {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: var(--azul-marinho);
     margin-bottom: var(--spacing-sm);
 }
 
-.section-subtitle {
+.lp-benefits .section-subtitle {
     text-align: center;
     font-size: 1.1rem;
     color: #6B7280;
@@ -107,7 +113,7 @@
 
 .lp-benefits-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-lg);
 }
 
@@ -125,24 +131,26 @@
 }
 
 .lp-benefit-icon {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: var(--spacing-md);
 }
 
 .lp-benefit-card h3 {
     color: var(--azul-marinho);
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     margin-bottom: var(--spacing-sm);
+    text-align: center;
 }
 
 .lp-benefit-card p {
     color: #6B7280;
     line-height: 1.6;
+    text-align: center;
 }
 
 /* Process Section */
 .lp-process {
-    padding: calc(var(--spacing-xl) * 2) 0;
+    padding: calc(var(--spacing-xl) * 2) var(--spacing-sm);
     background: #F9FAFB;
 }
 
@@ -151,8 +159,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--spacing-md);
-    max-width: 1200px;
-    margin: 0 auto;
+    flex-wrap: wrap;
 }
 
 .lp-step {
@@ -162,6 +169,7 @@
     border-radius: 12px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    min-width: 200px;
 }
 
 .lp-step-number {
@@ -182,29 +190,32 @@
     color: var(--azul-marinho);
     font-size: 1.1rem;
     margin-bottom: var(--spacing-sm);
+    text-align: center;
 }
 
 .lp-step p {
     color: #6B7280;
     font-size: 0.95rem;
     line-height: 1.5;
+    text-align: center;
 }
 
 .lp-step-arrow {
     font-size: 2rem;
     color: var(--azul-marinho);
     font-weight: 700;
+    align-self: center;
 }
 
 /* Target Section */
 .lp-target {
-    padding: calc(var(--spacing-xl) * 2) 0;
+    padding: calc(var(--spacing-xl) * 2) var(--spacing-sm);
     background: white;
 }
 
 .lp-target-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-lg);
 }
 
@@ -217,24 +228,26 @@
 
 .lp-target-card h3 {
     color: var(--azul-marinho);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-bottom: var(--spacing-sm);
+    text-align: center;
 }
 
 .lp-target-card p {
     color: #6B7280;
     line-height: 1.6;
+    text-align: center;
 }
 
 /* Differentials Section */
 .lp-differentials {
-    padding: calc(var(--spacing-xl) * 2) 0;
+    padding: calc(var(--spacing-xl) * 2) var(--spacing-sm);
     background: #F9FAFB;
 }
 
 .lp-differentials-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--spacing-lg);
 }
 
@@ -256,22 +269,24 @@
     color: var(--azul-marinho);
     font-size: 1.1rem;
     margin-bottom: var(--spacing-xs);
+    text-align: left;
 }
 
 .lp-differential-text p {
     color: #6B7280;
     line-height: 1.6;
+    text-align: left;
 }
 
 /* Testimonials Section */
 .lp-testimonials {
-    padding: calc(var(--spacing-xl) * 2) 0;
+    padding: calc(var(--spacing-xl) * 2) var(--spacing-sm);
     background: white;
 }
 
 .lp-testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-lg);
 }
 
@@ -287,6 +302,7 @@
     line-height: 1.7;
     margin-bottom: var(--spacing-md);
     font-style: italic;
+    text-align: left;
 }
 
 .lp-testimonial-author {
@@ -297,7 +313,7 @@
 
 .lp-testimonial-author strong {
     color: var(--azul-marinho);
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .lp-testimonial-author span {
@@ -307,7 +323,7 @@
 
 /* FAQ Section */
 .lp-faq {
-    padding: calc(var(--spacing-xl) * 2) 0;
+    padding: calc(var(--spacing-xl) * 2) var(--spacing-sm);
     background: #F9FAFB;
 }
 
@@ -328,17 +344,23 @@
     color: var(--azul-marinho);
     font-size: 1.1rem;
     margin-bottom: var(--spacing-sm);
+    text-align: left;
 }
 
 .lp-faq-item p {
     color: #6B7280;
     line-height: 1.7;
+    text-align: left;
 }
 
 /* CTA Final Section */
 .lp-cta-final {
-    padding: calc(var(--spacing-xl) * 2) 0;
+    padding: calc(var(--spacing-xl) * 2) var(--spacing-sm);
     background: linear-gradient(135deg, var(--azul-marinho) 0%, #2A4A73 100%);
+    color: white;
+}
+
+.lp-cta-final h2 {
     color: white;
 }
 
@@ -347,6 +369,7 @@
     font-size: 1.1rem;
     margin-bottom: var(--spacing-xl);
     opacity: 0.9;
+    color: white;
 }
 
 .lp-cta-content {
@@ -358,7 +381,7 @@
 
 .lp-cta-form {
     background: white;
-    padding: var(--spacing-xl);
+    padding: var(--spacing-lg);
     border-radius: 12px;
 }
 
@@ -372,11 +395,16 @@
     margin-bottom: var(--spacing-md);
 }
 
+.lp-cta-form .form-row .form-group {
+    margin-bottom: 0;
+}
+
 .lp-cta-form label {
     display: block;
     color: var(--azul-marinho);
     font-weight: 600;
     margin-bottom: var(--spacing-xs);
+    font-size: 0.95rem;
 }
 
 .lp-cta-form input,
@@ -395,6 +423,7 @@
 .lp-cta-form textarea:focus {
     outline: none;
     border-color: var(--azul-marinho);
+    box-shadow: 0 0 0 3px rgba(27, 54, 93, 0.1);
 }
 
 .btn-submit {
@@ -404,7 +433,7 @@
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -413,11 +442,14 @@
 .btn-submit:hover {
     background: #2A4A73;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(27, 54, 93, 0.3);
 }
 
 .lp-cta-info h3 {
     font-size: 1.3rem;
     margin-bottom: var(--spacing-md);
+    color: white;
+    text-align: left;
 }
 
 .lp-contact-options {
@@ -449,19 +481,20 @@
 
 .lp-contact-btn strong {
     display: block;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .lp-contact-btn span {
     display: block;
     opacity: 0.9;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 .lp-trust-badges {
     background: rgba(255, 255, 255, 0.1);
     padding: var(--spacing-md);
     border-radius: 8px;
+    margin-top: var(--spacing-lg);
 }
 
 .lp-trust-badges p {
@@ -469,25 +502,25 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-xs);
+    text-align: left;
 }
 
 .lp-trust-badges p:last-child {
     margin-bottom: 0;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
     .lp-hero h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
     
     .lp-hero-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
     }
     
-    .lp-hero-benefits {
-        flex-direction: column;
-        align-items: center;
+    .lp-cta-content {
+        grid-template-columns: 1fr;
     }
     
     .lp-process-steps {
@@ -497,20 +530,187 @@
     .lp-step-arrow {
         transform: rotate(90deg);
     }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    body {
+        padding-top: 80px;
+    }
+    
+    .lp-hero {
+        padding: var(--spacing-xl) var(--spacing-sm);
+        margin-top: 80px;
+    }
+    
+    .lp-hero h1 {
+        font-size: 1.75rem;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .lp-hero-subtitle {
+        font-size: 1rem;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .lp-hero-benefits {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-md);
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .lp-hero-benefit {
+        font-size: 0.95rem;
+    }
+    
+    .lp-hero-ctas {
+        gap: var(--spacing-sm);
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.95rem;
+        width: 100%;
+    }
+    
+    .lp-benefits, .lp-process, .lp-target, .lp-differentials, .lp-testimonials, .lp-faq, .lp-cta-final {
+        padding: var(--spacing-xl) var(--spacing-sm);
+    }
+    
+    .lp-benefits h2, .lp-process h2, .lp-target h2, .lp-differentials h2, .lp-testimonials h2, .lp-faq h2, .lp-cta-final h2 {
+        font-size: 1.6rem;
+    }
+    
+    .lp-benefits-grid, .lp-target-grid, .lp-testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+    
+    .lp-benefit-card, .lp-target-card, .lp-testimonial-card {
+        padding: var(--spacing-md);
+    }
+    
+    .lp-benefit-icon {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .lp-process-steps {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .lp-step {
+        padding: var(--spacing-md);
+        min-width: auto;
+    }
+    
+    .lp-step-arrow {
+        transform: rotate(90deg);
+        margin: var(--spacing-sm) 0;
+    }
+    
+    .lp-differentials-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .lp-differential-item {
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+    
+    .lp-differential-icon {
+        font-size: 2rem;
+    }
     
     .lp-cta-content {
         grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .lp-cta-form {
+        padding: var(--spacing-lg);
     }
     
     .lp-cta-form .form-row {
         grid-template-columns: 1fr;
+        gap: var(--spacing-md);
     }
     
-    .lp-differentials-content,
-    .lp-benefits-grid,
-    .lp-target-grid,
-    .lp-testimonials-grid {
-        grid-template-columns: 1fr;
+    .lp-cta-form .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .lp-cta-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .lp-contact-options {
+        gap: var(--spacing-sm);
+    }
+    
+    .lp-contact-btn {
+        padding: var(--spacing-md);
+        gap: var(--spacing-sm);
+    }
+    
+    .contact-icon {
+        font-size: 1.5rem;
+    }
+    
+    .lp-contact-btn strong {
+        font-size: 0.95rem;
+    }
+    
+    .lp-contact-btn span {
+        font-size: 0.85rem;
+    }
+    
+    .lp-faq-list {
+        padding: 0;
+    }
+    
+    .lp-faq-item {
+        padding: var(--spacing-md);
+        margin-bottom: var(--spacing-sm);
     }
 }
 
+/* Responsive - Small Mobile */
+@media (max-width: 480px) {
+    .lp-hero h1 {
+        font-size: 1.5rem;
+    }
+    
+    .lp-hero-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .lp-benefits h2, .lp-process h2, .lp-target h2, .lp-differentials h2, .lp-testimonials h2, .lp-faq h2, .lp-cta-final h2 {
+        font-size: 1.4rem;
+    }
+    
+    .lp-benefit-card h3, .lp-target-card h3, .lp-testimonial-card h3 {
+        font-size: 1.05rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.9rem;
+    }
+    
+    .lp-step-number {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .lp-cta-form {
+        padding: var(--spacing-md);
+    }
+    
+    .lp-cta-info h3 {
+        font-size: 1rem;
+    }
+}

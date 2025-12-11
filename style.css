@@ -484,6 +484,13 @@ p {
     padding: var(--spacing-lg);
     border-radius: 15px;
     transition: var(--transition);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.servico-link {
+    cursor: pointer;
 }
 
 .servico-card:hover {
