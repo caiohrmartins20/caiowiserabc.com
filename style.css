@@ -736,7 +736,7 @@ p {
 .footer {
     background: var(--azul-marinho);
     color: var(--branco);
-    padding: var(--spacing-xl) 0 var(--spacing-md);
+    padding: var(--spacing-md) 0 var(--spacing-sm);
     text-align: center;
 }
 
@@ -745,8 +745,8 @@ p {
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
 }
 
 .footer-logo {
@@ -780,7 +780,7 @@ p {
 
 .footer-section h4 {
     color: var(--branco);
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
     text-align: center;
 }
 
@@ -790,7 +790,7 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-sm);
+    gap: var(--spacing-xs);
 }
 
 .footer-section li {
@@ -805,7 +805,7 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--spacing-sm);
+    padding: var(--spacing-xs);
     border: 1px solid transparent;
     border-radius: 8px;
     text-align: center;
@@ -1091,7 +1091,7 @@ p {
 }
 
 .btg-aum {
-    text-align: left;
+    text-align: center;
 }
 
 .aum-number {
@@ -1100,6 +1100,7 @@ p {
     font-weight: 700;
     color: var(--azul-marinho);
     line-height: 1;
+    text-align: center;
 }
 
 .aum-label {
