@@ -1101,6 +1101,7 @@ p {
     color: var(--azul-marinho);
     line-height: 1;
     text-align: center;
+    margin-bottom: var(--spacing-sm);
 }
 
 .aum-label {
